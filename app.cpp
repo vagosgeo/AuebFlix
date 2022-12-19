@@ -15,6 +15,8 @@ void App::draw()
 
 	for (auto widget : widgets) {
 		widget->draw();
+
+
 	}
 
 }
