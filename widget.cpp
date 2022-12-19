@@ -24,6 +24,8 @@ void Widget::update()
 
 }
 
+
+// set the name of each photo
 std::string Widget::setPath(int i)
 {
 	if (i == 0) {
