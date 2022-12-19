@@ -24,6 +24,7 @@ void App::init()
 {
 	
 	for (int i = 0; i < 4; i++) {
+		//pes oti kaneis kapoia allagh opws auto to sxolio
 		
 		// for each widget set the coordinates and the name of photo
 		Widget* w = new Widget();
