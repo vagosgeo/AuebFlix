@@ -24,14 +24,15 @@ void App::init()
 {
 	
 	for (int i = 0; i < 4; i++) {
-		//for (int j = 0; j < 2; j++) {
-			Widget* w = new Widget();
-			widgets.push_front(w);
-			w->setPosX(CANVAS_WIDTH * (i + 0.5f) / 7.0f);
-			w->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
-			w->setPath(i);
+		
+		// for each widget set the coordinates and the name of photo
+		Widget* w = new Widget();
+		widgets.push_front(w);
+    	w->setPosX(CANVAS_WIDTH * (i + 0.5f) / 7.0f);
+		w->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
+		w->setPath(i);
 			
-		//}
+		
 	}
 	
 	/*Widget* w = new Widget();
