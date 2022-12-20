@@ -9,12 +9,12 @@ void draw() {
 }
 
 void update(float ms) {
-	//App* myapp = reinterpret_cast<App*>(graphics::getUserData());
-	//myapp->update();
+	App* myapp = (App*)(graphics::getUserData());
+	myapp->update();
 }
 
 int main(int argc, char** argv) {
-	graphics::createWindow(800, 600, "AuebFlix");
+	graphics::createWindow(1200, 600, "AuebFlix");
 	App* myapp = new App();
 	myapp->init();
 	graphics::setUserData(myapp);

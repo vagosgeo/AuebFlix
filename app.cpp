@@ -2,6 +2,8 @@
 #include "defines.h"
 #include <graphics.h>
 #include <string>
+#include <iostream>
+#include "Film.h"
 
 
 void App::draw()
@@ -13,12 +15,12 @@ void App::draw()
 	br.texture = ASSET_PATH + std::string("BackGround.png");
 	graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, CANVAS_WIDTH, CANVAS_HEIGHT, br);
 
-	for (auto widget : widgets) {
-		widget->draw();
-
-
+	
+	for (auto film : films) {
+		film->draw();
 	}
-
+		
+	
 }
 
 
@@ -29,11 +31,13 @@ void App::init()
 		//pes oti kaneis kapoia allagh opws auto to sxolio
 		
 		// for each widget set the coordinates and the name of photo
-		Widget* w = new Widget();
-		widgets.push_front(w);
+		Film* w = new Film();
+		films.push_front(w);
     	w->setPosX(CANVAS_WIDTH * (i + 0.5f) / 7.0f);
 		w->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
 		w->setPath(i);
+		w->setSizeX(WIDGET_WIDTH);
+		w->setSizeY(WIDGET_HEIGHT);
 			
 		
 	}
@@ -46,10 +50,10 @@ void App::init()
 
 void App::update()
 {
+	
+	
 
-	for (auto widget : widgets) {
-		widget->update();
-	}
+	
 
 	graphics::MouseState ms;
 	graphics::getMouseState(ms);
@@ -58,14 +62,24 @@ void App::update()
 
 	Widget* cur_widget = nullptr;
 	
-	for (auto widget : widgets) {
+	for (auto widget : films) {
 		if (widget->contains(mx, my)) {
-			widget->setHighlight(true);
-			cur_widget = widget;
+			
+			
+			float widget_x = widget->getSizeX();
+			float widget_y = widget->getSizeY();
+			widget->setSizeX(widget_x + graphics::getDeltaTime()/30);
+			widget->setSizeY(widget_y + graphics::getDeltaTime() /30);
+			
 
 		}
-		else
-			widget->setHighlight(false);
+		else 
+		{
+			
+			widget->setSizeX(WIDGET_WIDTH);
+			widget->setSizeY(WIDGET_HEIGHT);
+			std::cout << "ELSE!!!";
+		}
 	}
 
 	

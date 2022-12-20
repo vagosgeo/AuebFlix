@@ -1,14 +1,16 @@
 #pragma once
 #include <list>
 #include "widget.h"
+#include "Film.h"
 
 
 class App {
 
-	std::list<Widget*> widgets;
+	std::list<Film*> films;
 
 public:
 	void draw();
 	void update();
 	void init();
+	
 };

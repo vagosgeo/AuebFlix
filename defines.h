@@ -3,11 +3,11 @@
 #include <string>
 
 
-#define CANVAS_WIDTH 28.0f
-#define CANVAS_HEIGHT 20.0f
+#define CANVAS_WIDTH 1000.0f
+#define CANVAS_HEIGHT 500.0f
 
-#define WIDGET_HEIGHT 5.0f
-#define WIDGET_WIDTH 3.0f
+#define WIDGET_HEIGHT 170.0f
+#define WIDGET_WIDTH 120.0f
 #define PHOTO "ANewHope.png" 
 #define PHOTO1 "EmpireStrikesBack.png"
 #define PHOTO2 "FightClub.png"

@@ -1,22 +1,24 @@
 #pragma once
-#include <string>
+#include "defines.h"
 
 class Widget {
-	std::string PHOTO_PATH;
-;	float w_pos[2];
-	float w_color[3];
-	std::string colour[4]
-		= { "ANewHope.png", "EmpireStrikesBack.png", "FightClub.png", "Godfather.png" };
-	bool w_highlighted = false;
+	float posX;
+	float posY;
+	float sizeX;
+	float sizeY;
 
 public:
-	void draw();
-	void update();
-	std::string setPath(int i);
-	float getPosX() { return w_pos[0]; }
-	float getPosY() { return w_pos[1]; }
-	void setPosX(float x) { w_pos[0] = x; }
-	void setPosY(float y) { w_pos[1] = y; }
-	void setHighlight(bool h ) { w_highlighted = h; }
-	bool contains(float x, float y);
+	virtual void draw() = 0;
+	virtual void update() = 0;
+	
+	float getPosX() { return posX; }
+	float getPosY() { return posY; }
+	void setPosX(float x) { posX = x; }
+	void setPosY(float y) { posY = y; }
+	void setSizeX(float x) { sizeX = x; }
+	void setSizeY(float y) { sizeY = y; }
+	float getSizeX() { return sizeX; }
+	float getSizeY() { return sizeY; }
+	bool contains(float x, float y){ return distance(x, y, posX, posY) < WIDGET_WIDTH * 0.4f; }
+	
 };
