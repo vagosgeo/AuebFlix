@@ -2,10 +2,12 @@
 #include "defines.h"
 #include <string>
 #include "app.h"
+#include "iostream"
 
 void draw() {
 	App* myapp = (App*)graphics::getUserData();
 	myapp->draw();
+	
 }
 
 void update(float ms) {

@@ -31,8 +31,20 @@ void Film::setPath(int i)
 	else if (i == 2) {
 		IconPath = PHOTO2;
 	}
-	else {
+	else if(i==3) {
 		IconPath = PHOTO3;
+	}
+	else if (i == 4) {
+		IconPath = PHOTO4;
+	}
+	else if (i == 5) {
+		IconPath = PHOTO5;
+	}
+	else if(i==6) {
+		IconPath = PHOTO6;
+	}
+	else {
+		IconPath = PHOTO;
 	}
 }
 

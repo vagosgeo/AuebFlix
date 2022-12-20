@@ -4,6 +4,7 @@
 
 class Film : public Widget {
 	std::string IconPath;
+	int counter;
 	
 public:
 	void update();

@@ -12,6 +12,9 @@
 #define PHOTO1 "EmpireStrikesBack.png"
 #define PHOTO2 "FightClub.png"
 #define PHOTO3 "Godfather.png"
+#define PHOTO4 "ANewHope.png"
+#define PHOTO5 "ANewHope.png"
+#define PHOTO6 "ANewHope.png"
 
 
 

@@ -27,13 +27,13 @@ void App::draw()
 void App::init()
 {
 	
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 9; i++) {
 		//pes oti kaneis kapoia allagh opws auto to sxolio
 		
 		// for each widget set the coordinates and the name of photo
 		Film* w = new Film();
 		films.push_front(w);
-    	w->setPosX(CANVAS_WIDTH * (i + 0.5f) / 7.0f);
+    	w->setPosX(CANVAS_WIDTH * (i + 0.2f) / 7.0f);
 		w->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
 		w->setPath(i);
 		w->setSizeX(WIDGET_WIDTH);
@@ -65,12 +65,12 @@ void App::update()
 	for (auto widget : films) {
 		if (widget->contains(mx, my)) {
 			
-			
-			float widget_x = widget->getSizeX();
-			float widget_y = widget->getSizeY();
-			widget->setSizeX(widget_x + graphics::getDeltaTime()/30);
-			widget->setSizeY(widget_y + graphics::getDeltaTime() /30);
-			
+			if (widget->getSizeX() < 150) {
+				float widget_x = widget->getSizeX();
+				float widget_y = widget->getSizeY();
+				widget->setSizeX(widget_x + graphics::getDeltaTime() / 20);
+				widget->setSizeY(widget_y + graphics::getDeltaTime() / 20);
+			}
 
 		}
 		else 
