@@ -141,12 +141,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Film.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="defines.h" />
     <ClInclude Include="Film.h" />
     <ClInclude Include="widget.h" />

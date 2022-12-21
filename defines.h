@@ -15,6 +15,9 @@
 #define PHOTO4 "ANewHope.png"
 #define PHOTO5 "ANewHope.png"
 #define PHOTO6 "ANewHope.png"
+#define LButton "LButton.png"
+#define RButton "RButton.png"
+
 
 
 

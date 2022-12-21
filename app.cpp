@@ -4,13 +4,21 @@
 #include <string>
 #include <iostream>
 #include "Film.h"
+#include "Button.h"
+#include <thread>
+
+
+
+
+
+
+
+
 
 
 void App::draw()
 {
 	graphics::Brush br;
-	//SETCOLOR(br.fill_color, 255.f, 255.f, 255.f);
-	//graphics::drawRect(w_pos[0], w_pos[1],)
 	br.outline_opacity = 0.0f;
 	br.texture = ASSET_PATH + std::string("BackGround.png");
 	graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, CANVAS_WIDTH, CANVAS_HEIGHT, br);
@@ -20,6 +28,10 @@ void App::draw()
 		film->draw();
 	}
 		
+	for (auto button : buttons) {
+		button->draw();
+	}
+	
 	
 }
 
@@ -27,32 +39,68 @@ void App::draw()
 void App::init()
 {
 	
-	for (int i = 0; i < 9; i++) {
-		//pes oti kaneis kapoia allagh opws auto to sxolio
+	for (int i = 0; i < 15; i++) {
 		
 		// for each widget set the coordinates and the name of photo
 		Film* w = new Film();
 		films.push_front(w);
-    	w->setPosX(CANVAS_WIDTH * (i + 0.2f) / 7.0f);
+    	w->setPosX(CANVAS_WIDTH * (i + 0.9f) / 6.8f);
 		w->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
 		w->setPath(i);
+		w->setId(counter);
+		counter++;
 		w->setSizeX(WIDGET_WIDTH);
 		w->setSizeY(WIDGET_HEIGHT);
 			
 		
 	}
 	
-	/*Widget* w = new Widget();
-	widgets.push_front(w);
-	w->setPosX(CANVAS_WIDTH / 6.0f);
-	w->setPosY(CANVAS_HEIGHT / 3.0f);*/
+	for (int i = 0; i < 3; i++) {
+		Button* b = new Button();
+		buttons.push_front(b);
+		if (i == 0) {
+			b->setPosX(CANVAS_WIDTH * (i + 0.2f) / 7.0f);
+			b->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
+			b->setPath(i);
+			b->setId(counter);
+			counter++;
+			b->setSizeX(WIDGET_WIDTH/3);
+			b->setSizeY(WIDGET_HEIGHT/3);
+		}
+		else if (i == 1) {
+			b->setPosX(CANVAS_WIDTH * (6 + 0.85f) / 7.0f);
+			b->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
+			b->setPath(i);
+			b->setId(counter);
+			counter++;
+			b->setSizeX(WIDGET_WIDTH/3);
+			b->setSizeY(WIDGET_HEIGHT/3);
+
+		}
+	}
 }
+
+
+
+
+
+/*bool App::requestFocus()
+{
+	if (!m_focus || m_focus = ) {
+		m_focus =
+		return true;
+	}
+	return false;
+
+}
+
+void App::releasedFocus()
+{
+}*/
 
 void App::update()
 {
 	
-	
-
 	
 
 	graphics::MouseState ms;
@@ -83,7 +131,48 @@ void App::update()
 	}
 
 	
-	/*if (ms.button_left_pressed && cur_widget) {
-	}*/
+
+	for (auto widget : buttons) {
+		if (widget->contains(mx, my)) {
+
+			if (widget->getSizeX() < 50) {
+				float widget_x = widget->getSizeX();
+				float widget_y = widget->getSizeY();
+				widget->setSizeX(widget_x + graphics::getDeltaTime() / 20);
+				widget->setSizeY(widget_y + graphics::getDeltaTime() / 20);
+			}
+			if (ms.button_left_pressed) {
+				if ( widget->getPath() == "LButton.png") {
+					for (auto film : films) {
+
+						x = film->getPosX();
+
+						film->setPosX(x + 200.f);
+
+					}
+				}
+				else if(widget->getPath() == "RButton.png") {
+					for (auto film : films) {
+
+						x = film->getPosX();
+
+						film->setPosX(x - 200.f);
+
+					}
+				}
+			}
+
+		}
+		else
+		{
+			
+			widget->setSizeX(WIDGET_WIDTH/3);
+			widget->setSizeY(WIDGET_HEIGHT/3);
+			std::cout << "ELSE!!!";
+		}
+	}
+
+	
+	
 
 }

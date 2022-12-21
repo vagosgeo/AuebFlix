@@ -1,4 +1,6 @@
 ﻿  app.cpp
-C:\temp\GitHub\AuebFlix\app.cpp(60,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\GitHub\AuebFlix\app.cpp(61,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  AuebFlix.vcxproj -> C:\temp\GitHub\AuebFlix\bin\AuebFlixd.exe
+C:\temp\AuebFlix\app.cpp(108,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(109,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  main.cpp
+  Generating Code...
+  AuebFlix.vcxproj -> C:\temp\AuebFlix\bin\AuebFlixd.exe
