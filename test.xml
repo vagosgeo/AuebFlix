@@ -1,0 +1,22 @@
+<file>
+	<Films>
+		<Film>
+			<title>1</title>
+			<genre>Saving</genre>
+			<actors>John Doe</actors>
+			<date>399.88</date>
+			<image>01/01/2017</image>
+			<description>DESCRIPTION</description>
+		</Film>
+
+		<Film>
+			<title>1</title>
+			<genre>Saving</genre>
+			<actors>John Doe</actors>
+			<date>399.88</date>
+			<image>01/01/2017</image>
+			<description>DESCRIPTION</description>
+		</Film>
+	</Films>
+
+</file>

@@ -6,6 +6,7 @@
 #include "Film.h"
 #include "Button.h"
 #include <thread>
+#include "readFilmData.h"
 
 
 
@@ -38,20 +39,17 @@ void App::draw()
 
 void App::init()
 {
+	readFilmData(films);
 	
-	for (int i = 0; i < 15; i++) {
+	for (Film* film : films) {
 		
-		// for each widget set the coordinates and the name of photo
-		Film* w = new Film();
-		films.push_front(w);
-    	w->setPosX(CANVAS_WIDTH * (i + 0.9f) / 6.8f);
-		w->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
-		w->setPath(i);
-		w->setId(counter);
+		// for each film set the coordinates 		
+    	film->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
+		film->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
+		film->setId(counter);
 		counter++;
-		w->setSizeX(WIDGET_WIDTH);
-		w->setSizeY(WIDGET_HEIGHT);
-			
+		film->setSizeX(WIDGET_WIDTH);
+		film->setSizeY(WIDGET_HEIGHT);
 		
 	}
 	
@@ -78,6 +76,8 @@ void App::init()
 
 		}
 	}
+
+	
 }
 
 
@@ -126,7 +126,7 @@ void App::update()
 			
 			widget->setSizeX(WIDGET_WIDTH);
 			widget->setSizeY(WIDGET_HEIGHT);
-			std::cout << "ELSE!!!";
+			
 		}
 	}
 
@@ -168,7 +168,7 @@ void App::update()
 			
 			widget->setSizeX(WIDGET_WIDTH/3);
 			widget->setSizeY(WIDGET_HEIGHT/3);
-			std::cout << "ELSE!!!";
+			
 		}
 	}
 

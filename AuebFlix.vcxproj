@@ -140,17 +140,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Users\nikos\OneDrive\Υπολογιστής\c++ code\proxeiro\proxeiro\tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Film.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="readFilmData.cpp" />
     <ClCompile Include="widget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Users\nikos\OneDrive\Υπολογιστής\c++ code\proxeiro\proxeiro\tinyxml2\tinyxml2.h" />
     <ClInclude Include="app.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="defines.h" />
     <ClInclude Include="Film.h" />
+    <ClInclude Include="readFilmData.h" />
     <ClInclude Include="widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

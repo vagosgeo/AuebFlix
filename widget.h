@@ -17,7 +17,7 @@ public:
 	float getPosY() { return posY; }
 	void setPosX(float x) { posX = x; }
 	void setPosY(float y) { posY = y; }
-	void setSizeX(float x) { sizeX = x; }
+	virtual void setSizeX(float x) { sizeX = x; }
 	void setSizeY(float y) { sizeY = y; }
 	float getSizeX() { return sizeX; }
 	float getSizeY() { return sizeY; }

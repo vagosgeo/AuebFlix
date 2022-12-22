@@ -3,6 +3,7 @@
 #include <string>
 
 
+
 #define CANVAS_WIDTH 1000.0f
 #define CANVAS_HEIGHT 500.0f
 
@@ -17,6 +18,7 @@
 #define PHOTO6 "ANewHope.png"
 #define LButton "LButton.png"
 #define RButton "RButton.png"
+#define XML "test.xml"
 
 
 
@@ -29,3 +31,4 @@ inline float distance(float x1, float y1, float x2, float y2) {
 	float dy = y1 - y2;
 	return sqrtf(dx * dx + dy * dy);
 }
+
