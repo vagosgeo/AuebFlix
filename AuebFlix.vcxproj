@@ -146,7 +146,6 @@
     <ClCompile Include="Film.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="readFilmData.cpp" />
-    <ClCompile Include="widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Users\nikos\OneDrive\Υπολογιστής\c++ code\proxeiro\proxeiro\tinyxml2\tinyxml2.h" />

@@ -14,6 +14,7 @@ void draw() {
 void update(float ms) {
 	App* myapp = (App*)(graphics::getUserData());
 	myapp->update();
+	
 }
 
 int main(int argc, char** argv) {

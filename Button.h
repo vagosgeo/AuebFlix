@@ -10,7 +10,7 @@ class Button : public Widget {
 public:
 	void update();
 	void draw();
-	void setPath(int i);
+	void setPath(std::string path);
 	std::string getPath();
 
 

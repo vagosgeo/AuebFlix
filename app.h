@@ -15,12 +15,16 @@ class App {
 	//bool focus = false;
 	float x;
 	float y;
+	Widget* focus = nullptr;
 
 public:
 	void draw();
 	void update();
 	void init();
-	//bool requestFocus();
+	bool requestFocus(Widget* object_ptr);		// TAKES FOCUS IF FOCUS == NULLPTR AND RETURNS TRUE (ALSO RETURNS TRUE IF OBJ. CURRENTLY HAS FOCUS).
+	void forceFocus(Widget* object_ptr);		// TAKE FOCUS BY FORCE EVEN IF ANOTHER OBJECT HAS THE FOCUS.
+	void releaseFocus() { focus = nullptr; }
+
 	//void releasedFocus();
 	//void drawStartScreen();
 	//void drawAppScreen();

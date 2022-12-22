@@ -13,14 +13,9 @@ void Button::draw()
 	graphics::drawRect(getPosX(), getPosY(), getSizeX(), getSizeY(), br);
 }
 
-void Button::setPath(int i)
+void Button::setPath(std::string path)
 {
-	if (i == 0) {
-		ButtonPath = LButton;
-	}
-	else {
-		ButtonPath = RButton;
-	}
+	ButtonPath = path;
 }
 
 std::string Button::getPath()

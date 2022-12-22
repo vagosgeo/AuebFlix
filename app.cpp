@@ -43,23 +43,28 @@ void App::init()
 	
 	for (Film* film : films) {
 		
-		// for each film set the coordinates 		
-    	film->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
-		film->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
-		film->setId(counter);
-		counter++;
-		film->setSizeX(WIDGET_WIDTH);
-		film->setSizeY(WIDGET_HEIGHT);
+		// for each film set the coordinates 
+		
+			film->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
+			film->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
+			film->setId(counter);
+			counter++;
+			film->setSizeX(WIDGET_WIDTH);
+			film->setSizeY(WIDGET_HEIGHT);
+		
+		
+			
+		
 		
 	}
-	
-	for (int i = 0; i < 3; i++) {
+	counter = 0;
+	for (int i = 0; i < 2; i++) {
 		Button* b = new Button();
 		buttons.push_front(b);
 		if (i == 0) {
 			b->setPosX(CANVAS_WIDTH * (i + 0.2f) / 7.0f);
 			b->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
-			b->setPath(i);
+			b->setPath(LButton);
 			b->setId(counter);
 			counter++;
 			b->setSizeX(WIDGET_WIDTH/3);
@@ -68,7 +73,7 @@ void App::init()
 		else if (i == 1) {
 			b->setPosX(CANVAS_WIDTH * (6 + 0.85f) / 7.0f);
 			b->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
-			b->setPath(i);
+			b->setPath(RButton);
 			b->setId(counter);
 			counter++;
 			b->setSizeX(WIDGET_WIDTH/3);
@@ -79,6 +84,7 @@ void App::init()
 
 	
 }
+
 
 
 
@@ -100,18 +106,15 @@ void App::releasedFocus()
 
 void App::update()
 {
-	
-	
-
 	graphics::MouseState ms;
 	graphics::getMouseState(ms);
 	float mx = graphics::windowToCanvasX(ms.cur_pos_x);
 	float my = graphics::windowToCanvasY(ms.cur_pos_y);
 
-	Widget* cur_widget = nullptr;
+	
 	
 	for (auto widget : films) {
-		if (widget->contains(mx, my)) {
+		if (widget->contains(mx, my) && requestFocus(widget)) {
 			
 			if (widget->getSizeX() < 150) {
 				float widget_x = widget->getSizeX();
@@ -119,22 +122,19 @@ void App::update()
 				widget->setSizeX(widget_x + graphics::getDeltaTime() / 20);
 				widget->setSizeY(widget_y + graphics::getDeltaTime() / 20);
 			}
-
 		}
 		else 
 		{
-			
 			widget->setSizeX(WIDGET_WIDTH);
 			widget->setSizeY(WIDGET_HEIGHT);
-			
 		}
 	}
 
-	
-
 	for (auto widget : buttons) {
 		if (widget->contains(mx, my)) {
-
+			
+			forceFocus(widget);
+			
 			if (widget->getSizeX() < 50) {
 				float widget_x = widget->getSizeX();
 				float widget_y = widget->getSizeY();
@@ -146,33 +146,43 @@ void App::update()
 					for (auto film : films) {
 
 						x = film->getPosX();
-
 						film->setPosX(x + 200.f);
-
 					}
 				}
 				else if(widget->getPath() == "RButton.png") {
 					for (auto film : films) {
-
 						x = film->getPosX();
-
 						film->setPosX(x - 200.f);
-
 					}
 				}
 			}
-
 		}
 		else
 		{
-			
 			widget->setSizeX(WIDGET_WIDTH/3);
 			widget->setSizeY(WIDGET_HEIGHT/3);
-			
+			if (requestFocus(widget)) {			// RELEASE FOCUS ONLY IF THE MOUSE ISN'T HOVERING OVER THE OBJECT THAT CURRENTLY HAS THE FOCUS
+				releaseFocus();					
+			}
 		}
 	}
+}
 
-	
-	
 
+
+void App::forceFocus(Widget* object_ptr) { 
+		focus = object_ptr;
+}
+
+bool App::requestFocus(Widget* object_ptr) {
+	if (focus == nullptr) {
+		focus == object_ptr;
+		return true;
+	}
+	else if(focus == object_ptr) {
+		return true;
+	}
+	else { 
+		return false;
+	}
 }

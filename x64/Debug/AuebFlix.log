@@ -1,1 +1,6 @@
-﻿  AuebFlix.vcxproj -> C:\temp\GitHub\AuebFlix\bin\AuebFlixd.exe
+﻿  app.cpp
+C:\temp\GitHub\AuebFlix\app.cpp(107,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\GitHub\AuebFlix\app.cpp(108,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\GitHub\AuebFlix\app.cpp(177,9): warning C4553: '==': result of expression not used; did you intend '='?
+C:\temp\GitHub\AuebFlix\app.cpp(180): warning C4715: 'App::requestFocus': not all control paths return a value
+  AuebFlix.vcxproj -> C:\temp\GitHub\AuebFlix\bin\AuebFlixd.exe
