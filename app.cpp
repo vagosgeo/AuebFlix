@@ -7,6 +7,12 @@
 #include "Button.h"
 #include <thread>
 #include "readFilmData.h"
+#include <iterator>
+#include <list>
+#include <vector>
+#include <iostream>
+#include <bits-stdc++.h>
+using namespace std;
 
 
 
@@ -90,22 +96,12 @@ void App::init()
 
 
 
-/*bool App::requestFocus()
-{
-	if (!m_focus || m_focus = ) {
-		m_focus =
-		return true;
-	}
-	return false;
 
-}
-
-void App::releasedFocus()
-{
-}*/
 
 void App::update()
 {
+	auto l_front = films.begin();
+
 	graphics::MouseState ms;
 	graphics::getMouseState(ms);
 	float mx = graphics::windowToCanvasX(ms.cur_pos_x);
@@ -134,7 +130,7 @@ void App::update()
 		if (widget->contains(mx, my)) {
 			
 			forceFocus(widget);
-			
+			Film* k = nullptr;
 			if (widget->getSizeX() < 50) {
 				float widget_x = widget->getSizeX();
 				float widget_y = widget->getSizeY();
@@ -143,17 +139,71 @@ void App::update()
 			}
 			if (ms.button_left_pressed) {
 				if ( widget->getPath() == "LButton.png") {
+					int j = 0;
 					for (auto film : films) {
-
-						x = film->getPosX();
-						film->setPosX(x + 200.f);
+						
+						if (j == 0) {
+							
+							DimensionsVector.push_back(film->getPosX());
+							j++;
+				
+						}
+						else {
+							DimensionsVector.push_back(film->getPosX());
+							j++;
+						}
+						
 					}
+					
+					int VectorCounter = 0;
+					
+					for (auto film : films) {
+						if (VectorCounter == 0) {
+							film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
+							VectorCounter++;
+						}
+						else {
+							film->setPosX(DimensionsVector[VectorCounter-1]);
+							VectorCounter++;
+						}
+						
+						
+					}
+					DimensionsVector.clear();
+
+					
+					
 				}
 				else if(widget->getPath() == "RButton.png") {
+
+					int j = 0;
 					for (auto film : films) {
-						x = film->getPosX();
-						film->setPosX(x - 200.f);
+						if (j == 0) {
+
+							DimensionsVector.push_back(film->getPosX());
+							j++;
+
+						}
+						else {
+							DimensionsVector.push_back(film->getPosX());
+							j++;
+						}
 					}
+					int VectorCounter = 0;
+					
+					for (auto film : films) {
+						if (VectorCounter == DimensionsVector.size()-1) {
+							film->setPosX(DimensionsVector[0]);
+							VectorCounter++;
+						}
+						else {
+							film->setPosX(DimensionsVector[VectorCounter + 1]);
+							VectorCounter++;
+						}
+
+
+					}
+					DimensionsVector.clear();
 				}
 			}
 		}
@@ -174,6 +224,15 @@ void App::forceFocus(Widget* object_ptr) {
 		focus = object_ptr;
 }
 
+Film* App::get(std::list<Film*> films)
+{
+	std::list<Film*>::iterator it = films.begin();
+	for (int i = 0; i < films.size(); i++) {
+		++it;
+	}
+	return *it;
+}
+
 bool App::requestFocus(Widget* object_ptr) {
 	if (focus == nullptr) {
 		focus == object_ptr;
@@ -186,3 +245,4 @@ bool App::requestFocus(Widget* object_ptr) {
 		return false;
 	}
 }
+

@@ -1,6 +1,9 @@
-﻿  Button.cpp
+﻿  app.cpp
+C:\temp\AuebFlix\app.cpp(107,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(108,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(238,9): warning C4553: '==': result of expression not used; did you intend '='?
+  main.cpp
   readFilmData.cpp
 C:\temp\AuebFlix\readFilmData.cpp(13,10): warning C4101: 'amountText': unreferenced local variable
-  tinyxml2.cpp
   Generating Code...
   AuebFlix.vcxproj -> C:\temp\AuebFlix\bin\AuebFlixd.exe
