@@ -4,6 +4,7 @@
 #include "Film.h"
 #include "Button.h"
 #include <vector>
+#include "textField.h"
 
 
 class App {
@@ -13,6 +14,8 @@ class App {
 	std::vector<float> DimensionsVector;
 	std::list<Film*> films;
 	std::list<Button*> buttons;
+	std::vector<textField*> textFields;
+	
 	float x;
 	float y;
 	Widget* focus = nullptr;
@@ -25,7 +28,7 @@ public:
 	bool requestFocus(Widget* object_ptr);		// TAKES FOCUS IF FOCUS == NULLPTR AND RETURNS TRUE (ALSO RETURNS TRUE IF OBJ. CURRENTLY HAS FOCUS).
 	void forceFocus(Widget* object_ptr);		// TAKE FOCUS BY FORCE EVEN IF ANOTHER OBJECT HAS THE FOCUS.
 	void releaseFocus() { focus = nullptr; }
-	
+	void checkScanCodes();
 	Film* get(std::list<Film*> films);
 	//void drawStartScreen();
 	//void drawAppScreen();

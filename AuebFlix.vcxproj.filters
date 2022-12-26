@@ -33,6 +33,12 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="textField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="searchRect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="defines.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="readFilmData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="textField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="searchRect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

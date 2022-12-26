@@ -39,17 +39,18 @@ void App::draw()
 		button->draw();
 	}
 	
+	textFields[0]->draw();
 	
 }
 
 
 void App::init()
 {
-	readFilmData(films);
+	readFilmData(films);	// READS ALL THE FILMS THAT EXIST ON THE .XML AND STORES THEM IN THE 'films' LIST.
 	
-	for (Film* film : films) {
+	for (Film* film : films) {			
 		
-		// for each film set the coordinates 
+		// INITIALIZE THE COORDINATES AND SIZE OF ALL THE 'FILM' OBJECTS
 		
 			film->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 			film->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
@@ -58,13 +59,9 @@ void App::init()
 			film->setSizeX(WIDGET_WIDTH);
 			film->setSizeY(WIDGET_HEIGHT);
 		
-		
-			
-		
-		
 	}
 	counter = 0;
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 3; i++) {
 		Button* b = new Button();
 		buttons.push_front(b);
 		if (i == 0) {
@@ -84,11 +81,27 @@ void App::init()
 			counter++;
 			b->setSizeX(WIDGET_WIDTH/3);
 			b->setSizeY(WIDGET_HEIGHT/3);
-
+		}
+		else {
+			b->setPosX(CANVAS_WIDTH /2);
+			b->setPosY(20);
+			b->setPath("downButton.png");
+			b->setId(counter);
+			counter++;
+			b->setSizeX(WIDGET_WIDTH / 3);
+			b->setSizeY(WIDGET_HEIGHT / 3);
 		}
 	}
 
-	
+
+	textField* field = new textField();
+	field->setPosX(250);
+	field->setPosY(250);
+	field->setSizeX(150);
+	field->setSizeY(40);
+	textFields.push_back(field);
+
+	graphics::setFont(std::string(ASSET_PATH) + "open-sans.light.ttf");
 }
 
 
@@ -129,7 +142,7 @@ void App::update()
 	for (auto widget : buttons) {
 		if (widget->contains(mx, my)) {
 			
-			forceFocus(widget);
+			forceFocus(widget);		// CURRENT BUTTON TAKES FOCUS BY FORCE (EVEN IF ANOTHER WIDGET HAS FOCUS ALREADY).
 			Film* k = nullptr;
 			if (widget->getSizeX() < 50) {
 				float widget_x = widget->getSizeX();
@@ -216,6 +229,20 @@ void App::update()
 			}
 		}
 	}
+
+	for (textField* field : textFields) {
+		if (field->contains(mx, my) && requestFocus(field)) {
+			field->checkScanCodes();
+		}
+	}
+
+
+
+
+
+
+
+
 }
 
 
@@ -245,4 +272,6 @@ bool App::requestFocus(Widget* object_ptr) {
 		return false;
 	}
 }
+
+
 

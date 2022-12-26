@@ -145,6 +145,8 @@
     <ClCompile Include="Film.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="readFilmData.cpp" />
+    <ClCompile Include="searchRect.cpp" />
+    <ClCompile Include="textField.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +156,8 @@
     <ClInclude Include="defines.h" />
     <ClInclude Include="Film.h" />
     <ClInclude Include="readFilmData.h" />
+    <ClInclude Include="searchRect.h" />
+    <ClInclude Include="textField.h" />
     <ClInclude Include="widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

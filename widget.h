@@ -10,8 +10,8 @@ class Widget {
 	int w_id;
 
 public:
-	virtual void draw() = 0;
-	virtual void update() = 0;
+	virtual void draw() = 0;		// THIS CLASS IS 
+	virtual void update() = 0;		//	ABSTRACT 
 	
 	float getPosX() { return posX; }
 	float getPosY() { return posY; }
