@@ -1,2 +1,9 @@
-﻿  Film.cpp
+﻿  app.cpp
+C:\temp\AuebFlix\app.cpp(126,74): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(153,88): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(154,86): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(155,93): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(173,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(174,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(316,9): warning C4553: '==': result of expression not used; did you intend '='?
   AuebFlix.vcxproj -> C:\temp\AuebFlix\bin\AuebFlixd.exe
