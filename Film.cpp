@@ -16,7 +16,10 @@ void Film::draw()
 	br.outline_opacity = 0.0f;
 	br.texture = ASSET_PATH + getPath();
 	graphics::drawRect(getPosX(), getPosY(), getSizeX(), getSizeY(), br);
-
+	br.fill_opacity = 0.5f;
+	graphics::setOrientation(180.f);
+	graphics::drawRect(getPosX(), getPosY() + getSizeY(), -getSizeX(), getSizeY(), br);
+	graphics::resetPose();
 
 }
 

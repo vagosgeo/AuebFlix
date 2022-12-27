@@ -8,13 +8,15 @@
 
 
 class App {
-	//typedef enum { STATUS_START, STATUS_APP, STATUS_SEARCH } status_t;
-	//status_t status = STATUS_START;
+	typedef enum { STATUS_START, STATUS_APP, STATUS_SEARCH } status_t;
+	status_t status = STATUS_START;
 	int counter = 0;
 	std::vector<float> DimensionsVector;
 	std::list<Film*> films;
 	std::list<Button*> buttons;
 	std::vector<textField*> textFields;
+	bool drawText = false;
+	std::string text;
 	
 	float x;
 	float y;
@@ -29,9 +31,10 @@ public:
 	void forceFocus(Widget* object_ptr);		// TAKE FOCUS BY FORCE EVEN IF ANOTHER OBJECT HAS THE FOCUS.
 	void releaseFocus() { focus = nullptr; }
 	void checkScanCodes();
-	Film* get(std::list<Film*> films);
-	//void drawStartScreen();
-	//void drawAppScreen();
+	void drawStartScreen();
+	void drawAppScreen();
+	void updateStartScreen();
+	void updateAppScreen();
 	//void drawSearchScreen();
 	
 };

@@ -7,8 +7,8 @@
 #define CANVAS_WIDTH 1000.0f
 #define CANVAS_HEIGHT 500.0f
 
-#define WIDGET_HEIGHT 150.0f
-#define WIDGET_WIDTH 110.0f
+#define WIDGET_HEIGHT 110.0f //150
+#define WIDGET_WIDTH 100.0f  //110
 #define PHOTO "ANewHope.png" 
 #define PHOTO1 "EmpireStrikesBack.png"
 #define PHOTO2 "FightClub.png"

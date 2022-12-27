@@ -25,22 +25,10 @@ using namespace std;
 
 void App::draw()
 {
-	graphics::Brush br;
-	br.outline_opacity = 0.0f;
-	br.texture = ASSET_PATH + std::string("BackGround.png");
-	graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, CANVAS_WIDTH, CANVAS_HEIGHT, br);
-
-	
-	for (auto film : films) {
-		film->draw();
-	}
-		
-	for (auto button : buttons) {
-		button->draw();
-	}
-	
-	textFields[0]->draw();
-	
+	if (status == STATUS_START)
+		drawStartScreen();
+	else if (status == STATUS_APP)
+		drawAppScreen();
 }
 
 
@@ -61,12 +49,14 @@ void App::init()
 		
 	}
 	counter = 0;
+
+	// INITIALIZE THE COORDINATES AND SIZE OF ALL THE 'Button' OBJECTS
 	for (int i = 0; i < 3; i++) {
 		Button* b = new Button();
 		buttons.push_front(b);
 		if (i == 0) {
 			b->setPosX(CANVAS_WIDTH * (i + 0.2f) / 7.0f);
-			b->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
+			b->setPosY(CANVAS_HEIGHT * (0.8f) / 3.0f);
 			b->setPath(LButton);
 			b->setId(counter);
 			counter++;
@@ -106,25 +96,109 @@ void App::init()
 
 
 
-
-
-
-
-
 void App::update()
 {
-	auto l_front = films.begin();
+	if (status == STATUS_START) {
+		updateStartScreen();
+	}
+	else if (status == STATUS_APP) {
+		updateAppScreen();
+	}
 
+}
+
+
+void App::forceFocus(Widget* object_ptr) { 
+		focus = object_ptr;
+}
+
+void App::drawStartScreen()
+{
+	graphics::Brush br;
+	br.outline_opacity = 0.0f;
+	br.texture = ASSET_PATH + std::string("BackGround.png");
+	graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, CANVAS_WIDTH, CANVAS_HEIGHT, br);
+	char info[40];
+	sprintf_s(info, "AUEBFLIX");
+	graphics::drawText(CANVAS_WIDTH / 6, CANVAS_HEIGHT / 2, 40, info, br);
+	char press[40];
+	sprintf_s(press, "Press ENTER to continue...");
+	graphics::drawText(CANVAS_WIDTH /1.5, CANVAS_HEIGHT /1.1 , 30, press, br);
+	
+}
+
+void App::drawAppScreen()
+{
+	graphics::Brush br;
+	br.outline_opacity = 0.0f;
+	br.texture = ASSET_PATH + std::string("BackGround.png");
+	graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, CANVAS_WIDTH, CANVAS_HEIGHT, br);
+	//br.outline_opacity = 0.0f;
+	//br.texture = ASSET_PATH + std::string("fontoPlaisio.png");
+	//graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 5, CANVAS_WIDTH, CANVAS_HEIGHT / 3, br);
+
+
+	for (auto film : films) {
+		film->draw();
+	}
+
+	for (auto button : buttons) {
+		button->draw();
+	}
+
+	// draw the texts under the films when the mouse hovers the widgets
+	for (auto film : films) {
+		if (drawText && text == film->getPath()) {
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, film->getTitle(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 30, film->getActors(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.2, 20, film->getDate(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, film->getDescription(), br);
+			
+		}
+	}
+
+	//textFields[0]->draw();
+}
+
+void App::updateStartScreen()
+{
+	if (graphics::getKeyState(graphics::SCANCODE_RETURN))
+		status = STATUS_APP;
+}
+
+void App::updateAppScreen()
+{
 	graphics::MouseState ms;
 	graphics::getMouseState(ms);
 	float mx = graphics::windowToCanvasX(ms.cur_pos_x);
 	float my = graphics::windowToCanvasY(ms.cur_pos_y);
 
-	
-	
+
+
 	for (auto widget : films) {
 		if (widget->contains(mx, my) && requestFocus(widget)) {
-			
+
+			// if the mouse hovers a specific film, drawtext = true and take the path of the film
+			drawText = true;
+			if (widget->getPath() == "Godfather.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "FightClub.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "ANewHope.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "EmpireStrikesBack.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "TheInception.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "Terminator.png") {
+				text = widget->getPath();
+			}
+
 			if (widget->getSizeX() < 150) {
 				float widget_x = widget->getSizeX();
 				float widget_y = widget->getSizeY();
@@ -132,8 +206,9 @@ void App::update()
 				widget->setSizeY(widget_y + graphics::getDeltaTime() / 20);
 			}
 		}
-		else 
+		else
 		{
+			//drawText = false;
 			widget->setSizeX(WIDGET_WIDTH);
 			widget->setSizeY(WIDGET_HEIGHT);
 		}
@@ -141,7 +216,7 @@ void App::update()
 
 	for (auto widget : buttons) {
 		if (widget->contains(mx, my)) {
-			
+
 			forceFocus(widget);		// CURRENT BUTTON TAKES FOCUS BY FORCE (EVEN IF ANOTHER WIDGET HAS FOCUS ALREADY).
 			Film* k = nullptr;
 			if (widget->getSizeX() < 50) {
@@ -151,43 +226,41 @@ void App::update()
 				widget->setSizeY(widget_y + graphics::getDeltaTime() / 20);
 			}
 			if (ms.button_left_pressed) {
-				if ( widget->getPath() == "LButton.png") {
+				//if the specific button is pressed, move all the films left (circle movement) 
+				if (widget->getPath() == "LButton.png") {
 					int j = 0;
 					for (auto film : films) {
-						
+
 						if (j == 0) {
-							
+
 							DimensionsVector.push_back(film->getPosX());
 							j++;
-				
+
 						}
 						else {
 							DimensionsVector.push_back(film->getPosX());
 							j++;
 						}
-						
+
 					}
-					
+
 					int VectorCounter = 0;
-					
+
 					for (auto film : films) {
 						if (VectorCounter == 0) {
 							film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
 							VectorCounter++;
 						}
 						else {
-							film->setPosX(DimensionsVector[VectorCounter-1]);
+							film->setPosX(DimensionsVector[VectorCounter - 1]);
 							VectorCounter++;
 						}
-						
-						
+
 					}
 					DimensionsVector.clear();
-
-					
-					
 				}
-				else if(widget->getPath() == "RButton.png") {
+				//else_if the specific button is pressed, move all the films right (circle movement) 
+				else if (widget->getPath() == "RButton.png") {
 
 					int j = 0;
 					for (auto film : films) {
@@ -203,9 +276,9 @@ void App::update()
 						}
 					}
 					int VectorCounter = 0;
-					
+
 					for (auto film : films) {
-						if (VectorCounter == DimensionsVector.size()-1) {
+						if (VectorCounter == DimensionsVector.size() - 1) {
 							film->setPosX(DimensionsVector[0]);
 							VectorCounter++;
 						}
@@ -222,10 +295,10 @@ void App::update()
 		}
 		else
 		{
-			widget->setSizeX(WIDGET_WIDTH/3);
-			widget->setSizeY(WIDGET_HEIGHT/3);
+			widget->setSizeX(WIDGET_WIDTH / 3);
+			widget->setSizeY(WIDGET_HEIGHT / 3);
 			if (requestFocus(widget)) {			// RELEASE FOCUS ONLY IF THE MOUSE ISN'T HOVERING OVER THE OBJECT THAT CURRENTLY HAS THE FOCUS
-				releaseFocus();					
+				releaseFocus();
 			}
 		}
 	}
@@ -235,30 +308,8 @@ void App::update()
 			field->checkScanCodes();
 		}
 	}
-
-
-
-
-
-
-
-
 }
 
-
-
-void App::forceFocus(Widget* object_ptr) { 
-		focus = object_ptr;
-}
-
-Film* App::get(std::list<Film*> films)
-{
-	std::list<Film*>::iterator it = films.begin();
-	for (int i = 0; i < films.size(); i++) {
-		++it;
-	}
-	return *it;
-}
 
 bool App::requestFocus(Widget* object_ptr) {
 	if (focus == nullptr) {
