@@ -12,7 +12,7 @@
 #include <vector>
 #include <iostream>
 #include <bits-stdc++.h>
-using namespace std;
+#include "searchRect.h"
 
 
 
@@ -29,7 +29,12 @@ void App::draw()
 		drawStartScreen();
 	else if (status == STATUS_APP)
 		drawAppScreen();
-}
+
+
+	
+
+
+} // draw() ends here -------
 
 
 void App::init()
@@ -53,10 +58,10 @@ void App::init()
 	// INITIALIZE THE COORDINATES AND SIZE OF ALL THE 'Button' OBJECTS
 	for (int i = 0; i < 3; i++) {
 		Button* b = new Button();
-		buttons.push_front(b);
+		buttons.push_back(b);
 		if (i == 0) {
 			b->setPosX(CANVAS_WIDTH * (i + 0.2f) / 7.0f);
-			b->setPosY(CANVAS_HEIGHT * (0.8f) / 3.0f);
+			b->setPosY(CANVAS_HEIGHT * (0.5f) / 3.0f);
 			b->setPath(LButton);
 			b->setId(counter);
 			counter++;
@@ -83,16 +88,16 @@ void App::init()
 		}
 	}
 
+	graphics::setFont(std::string(ASSET_PATH) + "open-sans.light.ttf"); // sets the font of the application
 
-	textField* field = new textField();
-	field->setPosX(250);
-	field->setPosY(250);
-	field->setSizeX(150);
-	field->setSizeY(40);
-	textFields.push_back(field);
 
-	graphics::setFont(std::string(ASSET_PATH) + "open-sans.light.ttf");
-}
+	App::searchBox = new searchRect();
+	searchBox->setPosX(500);
+	searchBox->setPosY(-200);
+	searchBox->setSizeX(400);
+	searchBox->setSizeY(400);
+
+} // init() ends here ----------
 
 
 
@@ -105,12 +110,7 @@ void App::update()
 		updateAppScreen();
 	}
 
-}
-
-
-void App::forceFocus(Widget* object_ptr) { 
-		focus = object_ptr;
-}
+} // update() ends here ---------
 
 void App::drawStartScreen()
 {
@@ -138,6 +138,8 @@ void App::drawAppScreen()
 	//graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 5, CANVAS_WIDTH, CANVAS_HEIGHT / 3, br);
 
 
+	
+
 	for (auto film : films) {
 		film->draw();
 	}
@@ -157,8 +159,10 @@ void App::drawAppScreen()
 		}
 	}
 
-	//textFields[0]->draw();
-}
+	searchBox->draw();
+
+	
+} // drawAppScreen() ends here ----------
 
 void App::updateStartScreen()
 {
@@ -174,8 +178,27 @@ void App::updateAppScreen()
 	float my = graphics::windowToCanvasY(ms.cur_pos_y);
 
 
+	std::string search_string = searchBox->getTextField()->str;	// Gets the string from the searchBoxe's textField.
+	int counter = 0;
+	for (auto  widget : films) {
 
-	for (auto widget : films) {
+
+		if (search_string != search_str) {
+			if ((search_string == "") || searchFilmFields(widget, search_string)) {
+				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
+				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
+				counter++;
+
+			}
+			else {
+				widget->setPosX(-100);
+				widget->setPosY(-500);
+			}
+		}
+
+
+
+
 		if (widget->contains(mx, my) && requestFocus(widget)) {
 
 			// if the mouse hovers a specific film, drawtext = true and take the path of the film
@@ -217,9 +240,13 @@ void App::updateAppScreen()
 	for (auto widget : buttons) {
 		if (widget->contains(mx, my)) {
 
-			forceFocus(widget);		// CURRENT BUTTON TAKES FOCUS BY FORCE (EVEN IF ANOTHER WIDGET HAS FOCUS ALREADY).
+			if (searchBox->getDropButtonState() == false) {
+															// CURRENT BUTTON TAKES FOCUS BY FORCE (EVEN IF ANOTHER WIDGET HAS FOCUS ALREADY).
+				forceFocus(widget);					// EXCEPT IF DROP-DOWN SEARCH BOX IS ON THE CANVAS.
+			}					
+
 			Film* k = nullptr;
-			if (widget->getSizeX() < 50) {
+			if (widget->getSizeX() < 50 && requestFocus(widget)) {
 				float widget_x = widget->getSizeX();
 				float widget_y = widget->getSizeY();
 				widget->setSizeX(widget_x + graphics::getDeltaTime() / 20);
@@ -291,24 +318,34 @@ void App::updateAppScreen()
 					}
 					DimensionsVector.clear();
 				}
+
+				else if (widget->getPath() == "downButton.png") {
+
+					if (searchBox->getDropButtonState() == false) {
+						searchBox->setDropButton(true);
+						forceFocus(widget);			// WHILE DropButtonState IS TRUE HOLDS FOCUS EVEN IF ANOTHER BUTTON IS HOVERED.
+					}
+					else {
+						searchBox->setDropButton(false);
+					}
+				}
 			}
 		}
 		else
 		{
 			widget->setSizeX(WIDGET_WIDTH / 3);
 			widget->setSizeY(WIDGET_HEIGHT / 3);
-			if (requestFocus(widget)) {			// RELEASE FOCUS ONLY IF THE MOUSE ISN'T HOVERING OVER THE OBJECT THAT CURRENTLY HAS THE FOCUS
-				releaseFocus();
+			if (requestFocus(widget) && searchBox->getDropButtonState() == false) {			// RELEASE FOCUS ONLY IF THE MOUSE ISN'T HOVERING OVER THE OBJECT THAT CURRENTLY HAS THE FOCUS
+				releaseFocus();																		// AND SEARCH BOX ISN'T ON THE CANVAS( DROPBUTTONSTATE == FALSE).
 			}
 		}
-	}
+	} // BUTTONS FOR() ENDS HERE --------
 
-	for (textField* field : textFields) {
-		if (field->contains(mx, my) && requestFocus(field)) {
-			field->checkScanCodes();
-		}
-	}
-}
+	searchBox->update();
+
+	search_str = search_string;		// stores the search_string so it can be used in the next loop to check if it has changed or it's still the same.
+
+} // updateAppScreen() ends here --------
 
 
 bool App::requestFocus(Widget* object_ptr) {
@@ -322,7 +359,32 @@ bool App::requestFocus(Widget* object_ptr) {
 	else { 
 		return false;
 	}
+} // requestFocus() ends here -------
+
+void App::forceFocus(Widget* object_ptr) {
+	focus = object_ptr;
 }
 
 
+bool App::searchFilmFields(Film* film, std::string str) {
 
+	std::cout << str;
+
+	if (film->getActors().find(str) != std::string::npos) {
+		return true;
+	}
+	else if (film->getGenre().find(str) != std::string::npos) {
+		return true;
+	}
+	else if (film->getTitle().find(str) != std::string::npos) {
+		return true;
+	}
+	else if (film->getDate().find(str) != std::string::npos) {
+		return true;
+	}
+	else {
+		return false;
+	}
+
+
+}

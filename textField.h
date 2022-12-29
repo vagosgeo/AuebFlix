@@ -11,8 +11,9 @@ class textField : public Widget {
 	
 
 public :
+	textField(float posx, float posy, float sizex, float sizey);
 	void update();
 	void draw();
 	void checkScanCodes();
-	std::string str;
+	std::string str = "";
 };

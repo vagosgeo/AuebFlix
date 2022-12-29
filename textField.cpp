@@ -1,6 +1,16 @@
 #include "textField.h"
 #include "graphics.h"
 #include <iostream>
+
+
+textField::textField(float posx, float posy, float sizex, float sizey)
+{
+	setPosX(posx);
+	setPosY(posy);
+	setSizeX(sizex);
+	setSizeY(sizey);
+
+}
 void textField::update(){
 
 }
@@ -11,7 +21,8 @@ void textField::draw() {
 	br.fill_color[0] = 1.0f;
 	br.fill_color[1] = 1.0f;
 	br.fill_color[2] = 1.0f;
-
+	br.outline_opacity = 1.0f;
+	
 	graphics::drawRect(getPosX(), getPosY(), getSizeX(), getSizeY(), br);		// DRAWS A BLANK TEXT FIELD.
 
 	
@@ -41,7 +52,7 @@ void textField::draw() {
 	br.fill_color[1] = 0.0f;
 	br.fill_color[2] = 0.0f;
 	
-	graphics::drawText(getPosX()-50, getPosY()+10, 20, str, br);
+	graphics::drawText(getPosX()-80, getPosY()+10, 18, str, br);
 
 }
 
@@ -58,6 +69,9 @@ void textField::checkScanCodes() {			// CHECKS IF ANY ANY KEY OF THE KEYBOARD IS
 	}
 	else if (graphics::getKeyState(graphics::SCANCODE_D)) {
 		textFieldChars.push_back('d');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_E)) {
+		textFieldChars.push_back('e');
 	}
 	else if (graphics::getKeyState(graphics::SCANCODE_F)) {
 		textFieldChars.push_back('f');
@@ -77,7 +91,6 @@ void textField::checkScanCodes() {			// CHECKS IF ANY ANY KEY OF THE KEYBOARD IS
 	else if (graphics::getKeyState(graphics::SCANCODE_K)) {
 		textFieldChars.push_back('k');
 	}
-
 	else if (graphics::getKeyState(graphics::SCANCODE_L)) {
 		textFieldChars.push_back('l');
 	}
@@ -125,6 +138,36 @@ void textField::checkScanCodes() {			// CHECKS IF ANY ANY KEY OF THE KEYBOARD IS
 	}
 	else if (graphics::getKeyState(graphics::SCANCODE_0)) {
 		textFieldChars.push_back('0');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_1)) {
+		textFieldChars.push_back('1');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_2)) {
+		textFieldChars.push_back('2');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_3)) {
+		textFieldChars.push_back('3');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_4)) {
+		textFieldChars.push_back('4');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_5)) {
+		textFieldChars.push_back('5');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_6)) {
+		textFieldChars.push_back('6');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_7)) {
+		textFieldChars.push_back('7');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_8)) {
+		textFieldChars.push_back('8');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_9)) {
+		textFieldChars.push_back('9');
+	}
+	else if (graphics::getKeyState(graphics::SCANCODE_SPACE)) {
+		textFieldChars.push_back(' ');
 	}
 	else if (graphics::getKeyState(graphics::SCANCODE_BACKSPACE)) {
 		if (str.size() > 0 && backSpace_timeCounter == 0) {		// IF ITS THE FIRTS TIME 'BACKSPACE' IS PRESSED THEN POP THE LAST ITEM

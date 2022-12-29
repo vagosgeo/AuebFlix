@@ -1,10 +1,8 @@
-﻿  app.cpp
-C:\temp\GitHub\AuebFlix\app.cpp(111,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\GitHub\AuebFlix\app.cpp(112,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\GitHub\AuebFlix\app.cpp(179,9): warning C4553: '==': result of expression not used; did you intend '='?
+﻿  textField.cpp
+C:\temp\GitHub\AuebFlix\textField.cpp(47,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Generating code
-  5 of 589 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  1 of 740 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   AuebFlix.vcxproj -> C:\temp\GitHub\AuebFlix\x64\bin\AuebFlix.exe

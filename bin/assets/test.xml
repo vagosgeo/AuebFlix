@@ -1,33 +1,33 @@
 <file>
 	<Films>
 		<Film>
-			<title>The Godfather</title>
+			<title>the godfather</title>
 			<genre>drama</genre>
-			<actors>Marlon Brando</actors>
+			<actors>marlon brando</actors>
 			<date>1987</date>
-			<image>Godfather.png</image>
+			<image>godfather.png</image>
 			<description>DESCRIPTION</description>
 		</Film>
 
 		<Film>
-			<title>Fightclub</title>
-			<genre>Action, Drama</genre>
+			<title>fightclub</title>
+			<genre>action, drama</genre>
 			<actors>Brad Pitt</actors>
 			<date>2002</date>
-			<image>FightClub.png</image>
+			<image>fightclub.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>ANewHope</title>
-			<genre>Action, Drama</genre>
-			<actors>Brad Pitt</actors>
+			<title>a new hope</title>
+			<genre>action, drama</genre>
+			<actors>brad pitt</actors>
 			<date>2002</date>
 			<image>ANewHope.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
 			<title>EmpireStrikesBack</title>
-			<genre>Action, Drama</genre>
+			<genre>Action, drama</genre>
 			<actors>Brad Pitt</actors>
 			<date>2002</date>
 			<image>EmpireStrikesBack.png</image>
