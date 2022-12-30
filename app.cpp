@@ -40,7 +40,7 @@ void App::draw()
 void App::init()
 {
 	readFilmData(films);	// READS ALL THE FILMS THAT EXIST ON THE .XML AND STORES THEM IN THE 'films' LIST.
-	
+	int FirstFilm = 0;
 	for (Film* film : films) {			
 		
 		// INITIALIZE THE COORDINATES AND SIZE OF ALL THE 'FILM' OBJECTS
@@ -51,6 +51,14 @@ void App::init()
 			counter++;
 			film->setSizeX(WIDGET_WIDTH);
 			film->setSizeY(WIDGET_HEIGHT);
+
+			// DRAW THE INFORMATION OF THE FIRST FILM IN THE LIST
+			// KALYTERA NA MHN TO BALOYME GIATI EMFANIZOYME TIS PLHROFORIES OTAN GINETE HOVER
+			if (FirstFilm == 0) {
+				drawText = true;
+				text = film->getPath();
+				FirstFilm++;
+			}
 		
 	}
 	counter = 0;
@@ -147,14 +155,28 @@ void App::drawAppScreen()
 	for (auto button : buttons) {
 		button->draw();
 	}
-
+	graphics::Brush Textbr;
+	graphics::Brush Genrebr;
+	Genrebr.outline_opacity = 0.0f;
+	SETCOLOR(Genrebr.fill_color, 1.0f, 0.f, 0.f);
 	// draw the texts under the films when the mouse hovers the widgets
 	for (auto film : films) {
 		if (drawText && text == film->getPath()) {
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, film->getTitle(), br);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 30, film->getActors(), br);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.2, 20, film->getDate(), br);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, film->getDescription(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, film->getTitle(), Textbr);
+			//graphics::drawRect(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 50.,15., Genrebr);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 15, film->getGenre(), Textbr);
+			char Actors[40];
+			sprintf_s(Actors, "Actors:");
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.3, 20, Actors, Textbr);
+			graphics::drawText(CANVAS_WIDTH / 5, CANVAS_HEIGHT / 1.3, 15, film->getActors(), Textbr);
+			char Date[40];
+			sprintf_s(Date, "Year:");
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.25, 20, Date, Textbr);
+			graphics::drawText(CANVAS_WIDTH / 5, CANVAS_HEIGHT / 1.25, 15, film->getDate(), Textbr);
+			char Sum[40];
+			sprintf_s(Sum, "Summary:");
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.15, 20, Sum, Textbr);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.11, 8, film->getDescription(), Textbr);
 			
 		}
 	}
@@ -219,6 +241,12 @@ void App::updateAppScreen()
 				text = widget->getPath();
 			}
 			else if (widget->getPath() == "Terminator.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "TopGun.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "Avatar.png") {
 				text = widget->getPath();
 			}
 

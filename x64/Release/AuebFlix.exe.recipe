@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\temp\GitHub\AuebFlix\x64\bin\AuebFlix.exe</FullPath>
+      <FullPath>C:\temp\AuebFlix\x64\bin\AuebFlix.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
