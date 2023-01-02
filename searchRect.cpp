@@ -1,6 +1,6 @@
 #include "searchRect.h"
 #include "graphics.h"
-
+#include "app.h"
 
 
 
@@ -21,11 +21,11 @@ void searchRect::draw()
 	br.fill_secondary_color[1] = 0.0f;
 	br.fill_secondary_color[2] = 0.0f;
 	
-	br.fill_opacity = 2.0f;
+	br.fill_opacity = 0.5f;
 	br.fill_secondary_opacity = 1.f;
 
 	graphics::drawRect(getPosX(), getPosY(), getSizeX(), getSizeY(), br);
-
+	br.fill_opacity = 1.0f;
 	br.fill_color[0] = 1.0f;
 	br.fill_color[1] = 1.0f;
 	br.fill_color[2] = 1.0f;
@@ -33,6 +33,8 @@ void searchRect::draw()
 	br.gradient = false;
 	
 	graphics::drawText(getPosX()-50, getPosY()-160.0f, 30.0f, "Filters", br);
+	
+
 
 	
 	field->draw();

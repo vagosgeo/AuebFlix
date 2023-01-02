@@ -22,8 +22,10 @@ class App {
 	float y;
 	Widget* focus = nullptr;
 	std::string search_str;
+	bool PlayMusic = false;
 
 public:
+	//std::vector<Button*> buttons;
 	void draw();
 	void update();
 	void init();
