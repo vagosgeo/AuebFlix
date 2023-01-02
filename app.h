@@ -23,6 +23,7 @@ class App {
 	Widget* focus = nullptr;
 	std::string search_str;
 	bool PlayMusic = false;
+	bool PlayFilm = false;
 
 public:
 	//std::vector<Button*> buttons;

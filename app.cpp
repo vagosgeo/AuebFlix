@@ -198,6 +198,7 @@ void App::drawAppScreen()
 		PlayMusic = false;
 		
 	}
+	
 
 	searchBox->draw();
 
@@ -243,6 +244,8 @@ void App::updateAppScreen()
 
 			// if the mouse hovers a specific film, drawtext = true and take the path of the film
 			drawText = true;
+			
+			
 			if (widget->getPath() == "Godfather.png") {
 				text = widget->getPath();
 			}
