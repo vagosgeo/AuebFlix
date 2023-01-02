@@ -38,11 +38,9 @@ void App::draw()
 
 
 void App::init()
-
 {
-	
 	readFilmData(films);	// READS ALL THE FILMS THAT EXIST ON THE .XML AND STORES THEM IN THE 'films' LIST.
-	int FirstFilm = 0;
+	
 	for (Film* film : films) {			
 		
 		// INITIALIZE THE COORDINATES AND SIZE OF ALL THE 'FILM' OBJECTS
@@ -53,14 +51,6 @@ void App::init()
 			counter++;
 			film->setSizeX(WIDGET_WIDTH);
 			film->setSizeY(WIDGET_HEIGHT);
-
-			// DRAW THE INFORMATION OF THE FIRST FILM IN THE LIST
-			// KALYTERA NA MHN TO BALOYME GIATI EMFANIZOYME TIS PLHROFORIES OTAN GINETE HOVER
-			if (FirstFilm == 0) {
-				drawText = true;
-				text = film->getPath();
-				FirstFilm++;
-			}
 		
 	}
 	counter = 0;
@@ -87,7 +77,7 @@ void App::init()
 			b->setSizeX(WIDGET_WIDTH/3);
 			b->setSizeY(WIDGET_HEIGHT/3);
 		}
-		else{
+		else {
 			b->setPosX(CANVAS_WIDTH /2);
 			b->setPosY(20);
 			b->setPath("downButton.png");
@@ -131,11 +121,6 @@ void App::drawStartScreen()
 	char info[40];
 	sprintf_s(info, "AUEBFLIX");
 	graphics::drawText(CANVAS_WIDTH / 6, CANVAS_HEIGHT / 2, 40, info, br);
-	/*br.fill_opacity = 0.5f;
-	graphics::setOrientation(180.f);
-	graphics::drawText(CANVAS_WIDTH / 3.5, CANVAS_HEIGHT / 2, 40, info, br);
-	graphics::resetPose();
-	br.fill_opacity = 1.0f;*/
 	char press[40];
 	sprintf_s(press, "Press ENTER to continue...");
 	graphics::drawText(CANVAS_WIDTH /1.5, CANVAS_HEIGHT /1.1 , 30, press, br);
@@ -160,45 +145,19 @@ void App::drawAppScreen()
 	}
 
 	for (auto button : buttons) {
-		if (button->getPath() == "fontoPlaisio.png") {
-			break;
-		}
-		else {
-			button->draw();
-		}
+		button->draw();
 	}
-	graphics::Brush Textbr;
-	graphics::Brush Genrebr;
-	Genrebr.outline_opacity = 0.0f;
-	SETCOLOR(Genrebr.fill_color, 1.0f, 0.f, 0.f);
+
 	// draw the texts under the films when the mouse hovers the widgets
 	for (auto film : films) {
 		if (drawText && text == film->getPath()) {
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, film->getTitle(), Textbr);
-			//graphics::drawRect(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 50.,15., Genrebr);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 15, film->getGenre(), Textbr);
-			char Actors[40];
-			sprintf_s(Actors, "Actors:");
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.3, 20, Actors, Textbr);
-			graphics::drawText(CANVAS_WIDTH / 5, CANVAS_HEIGHT / 1.3, 15, film->getActors(), Textbr);
-			char Date[40];
-			sprintf_s(Date, "Year:");
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.25, 20, Date, Textbr);
-			graphics::drawText(CANVAS_WIDTH / 5, CANVAS_HEIGHT / 1.25, 15, film->getDate(), Textbr);
-			char Sum[40];
-			sprintf_s(Sum, "Summary:");
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.15, 20, Sum, Textbr);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.11, 8, film->getDescription(), Textbr);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, film->getTitle(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 30, film->getActors(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.2, 20, film->getDate(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, film->getDescription(), br);
 			
 		}
 	}
-	if (PlayMusic) {
-		
-		graphics::playMusic(std::string(ASSET_PATH) + "button.wav", 0.3f, false, 100);
-		PlayMusic = false;
-		
-	}
-	
 
 	searchBox->draw();
 
@@ -213,6 +172,7 @@ void App::updateStartScreen()
 
 void App::updateAppScreen()
 {
+	cout << graphics::getDeltaTime() << endl;
 	graphics::MouseState ms;
 	graphics::getMouseState(ms);
 	float mx = graphics::windowToCanvasX(ms.cur_pos_x);
@@ -244,8 +204,6 @@ void App::updateAppScreen()
 
 			// if the mouse hovers a specific film, drawtext = true and take the path of the film
 			drawText = true;
-			
-			
 			if (widget->getPath() == "Godfather.png") {
 				text = widget->getPath();
 			}
@@ -262,12 +220,6 @@ void App::updateAppScreen()
 				text = widget->getPath();
 			}
 			else if (widget->getPath() == "Terminator.png") {
-				text = widget->getPath();
-			}
-			else if (widget->getPath() == "TopGun.png") {
-				text = widget->getPath();
-			}
-			else if (widget->getPath() == "Avatar.png") {
 				text = widget->getPath();
 			}
 
@@ -304,7 +256,6 @@ void App::updateAppScreen()
 			if (ms.button_left_pressed) {
 				//if the specific button is pressed, move all the films left (circle movement) 
 				if (widget->getPath() == "LButton.png") {
-					PlayMusic = true;
 					int j = 0;
 					for (auto film : films) {
 
@@ -321,7 +272,6 @@ void App::updateAppScreen()
 
 					}
 
-
 					int VectorCounter = 0;
 
 					for (auto film : films) {
@@ -336,11 +286,10 @@ void App::updateAppScreen()
 
 					}
 					DimensionsVector.clear();
-					
 				}
 				//else_if the specific button is pressed, move all the films right (circle movement) 
 				else if (widget->getPath() == "RButton.png") {
-					PlayMusic = true;
+
 					int j = 0;
 					for (auto film : films) {
 						if (j == 0) {
@@ -369,7 +318,6 @@ void App::updateAppScreen()
 
 					}
 					DimensionsVector.clear();
-					
 				}
 
 				else if (widget->getPath() == "downButton.png") {
@@ -382,7 +330,6 @@ void App::updateAppScreen()
 						searchBox->setDropButton(false);
 					}
 				}
-				
 			}
 		}
 		else

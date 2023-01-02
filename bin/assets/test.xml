@@ -1,69 +1,61 @@
 <file>
 	<Films>
 		<Film>
-			<title>The Godfather</title>
-			<genre>Drama, Crime</genre>
-			<actors>Marlon Brando, Al Pacino, James Caan</actors>
-			<date>1972</date>
-			<image>Godfather.png</image>
-			<description>The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.</description>
+			<title>the godfather</title>
+			<genre>drama</genre>
+			<actors>marlon brando</actors>
+			<date>1987</date>
+			<image>godfather.png</image>
+			<description>DESCRIPTION</description>
 		</Film>
 
 		<Film>
-			<title>Fight Club</title>
-			<genre>Action, Drama</genre>
-			<actors>Brad Pitt, Edward Norton, Meat Loaf</actors>
-			<date>1999</date>
-			<image>FightClub.png</image>
-			<description>An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.</description>
+			<title>fightclub</title>
+			<genre>action, drama</genre>
+			<actors>Brad Pitt</actors>
+			<date>2002</date>
+			<image>fightclub.png</image>
+			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>A New Hope</title>
-			<genre>Action, Fantasy, Adventure</genre>
-			<actors>Mark Hamill, Harrison Ford, Carrie Fisher</actors>
-			<date>1977</date>
+			<title>a new hope</title>
+			<genre>action, drama</genre>
+			<actors>brad pitt</actors>
+			<date>2002</date>
 			<image>ANewHope.png</image>
-			<description>Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.</description>
+			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>Empire Strikes Back</title>
-			<genre>Action, Fantasy, Adventure</genre>
-			<actors>Mark Hamill, Harrison Ford, Carrie Fishe</actors>
+			<title>EmpireStrikesBack</title>
+			<genre>Action, drama</genre>
+			<actors>Brad Pitt</actors>
 			<date>2002</date>
 			<image>EmpireStrikesBack.png</image>
-			<description>After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.</description>
+			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>Inception</title>
-			<genre>Action, Adventure</genre>
-			<actors>Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page</actors>
-			<date>2010</date>
-			<image>TheInception.png</image>
-			<description>A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.</description>
-		</Film>
-		<Film>
-			<title>The Terminator</title>
-			<genre>Action</genre>
-			<actors>Arnold Schwarzenegger, Linda Hamilton, Michael Biehn</actors>
-			<date>1984</date>
-			<image>Terminator.png</image>
-			<description>A human soldier is sent from 2029 to 1984 to stop an almost indestructible cyborg killing machine, sent from the same year, which has been programmed to execute a young woman whose unborn son is the key to humanity's future salvation.</description>
-		</Film>
-		<Film>
-			<title>Top Gun</title>
+			<title>TheInception</title>
 			<genre>Action, Drama</genre>
-			<actors>Tom Cruise, Tim Robbins, Kelly McGillis</actors>
-			<date>1986</date>
-			<image>TopGun.png</image>
-			<description>As students at the United States Navy's elite fighter weapons school compete to be best in the class, one daring young pilot learns a few things from a civilian instructor that are not taught in the classroom.</description>
+			<actors>Brad Pitt</actors>
+			<date>2002</date>
+			<image>TheInception.png</image>
+			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>Avatar</title>
-			<genre>Action, Fantasy, Adventure</genre>
-			<actors>Sam Worthington, Zoe Saldana, Sigourney Weaver</actors>
-			<date>2009</date>
-			<image>Avatar.png</image>
-			<description>A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.</description>
+			<title>Terminator</title>
+			<genre>Action, Drama</genre>
+			<actors>Brad Pitt</actors>
+			<date>2002</date>
+			<image>Terminator.png</image>
+			<description>DESCRIPTION...</description>
+		</Film>
+		<Film>
+			<title>Fightclub</title>
+			<genre>Action, Drama</genre>
+			<actors>Brad Pitt</actors>
+			<date>2002</date>
+			<image>FightClub.png</image>
+			<description>DESCRIPTION...</description>
 		</Film>
 
 
