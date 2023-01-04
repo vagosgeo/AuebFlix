@@ -1,16 +1,14 @@
 ﻿  app.cpp
-C:\temp\AuebFlix\app.cpp(141,74): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(179,91): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(182,81): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(183,91): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(190,79): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(191,97): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(218,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(219,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(407,9): warning C4553: '==': result of expression not used; did you intend '='?
+C:\temp\AuebFlix\app.cpp(126,74): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(155,88): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(156,86): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(157,93): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(181,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(182,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(357,9): warning C4553: '==': result of expression not used; did you intend '='?
   Generating code
-  1 of 738 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 742 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   AuebFlix.vcxproj -> C:\temp\AuebFlix\x64\bin\AuebFlix.exe

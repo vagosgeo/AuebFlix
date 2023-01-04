@@ -22,6 +22,7 @@ class App {
 	float y;
 	Widget* focus = nullptr;
 	std::string search_str;
+	bool DBpressed = false;
 
 public:
 	void draw();

@@ -2,7 +2,7 @@
 	<Films>
 		<Film>
 			<title>the godfather</title>
-			<genre>drama</genre>
+			<genre>drama, crime</genre>
 			<actors>marlon brando</actors>
 			<date>1987</date>
 			<image>godfather.png</image>
@@ -27,7 +27,7 @@
 		</Film>
 		<Film>
 			<title>EmpireStrikesBack</title>
-			<genre>Action, drama</genre>
+			<genre>action, drama, fantasy</genre>
 			<actors>Brad Pitt</actors>
 			<date>2002</date>
 			<image>EmpireStrikesBack.png</image>
@@ -35,7 +35,7 @@
 		</Film>
 		<Film>
 			<title>TheInception</title>
-			<genre>Action, Drama</genre>
+			<genre>adventure</genre>
 			<actors>Brad Pitt</actors>
 			<date>2002</date>
 			<image>TheInception.png</image>
@@ -43,7 +43,7 @@
 		</Film>
 		<Film>
 			<title>Terminator</title>
-			<genre>Action, Drama</genre>
+			<genre>action, drama</genre>
 			<actors>Brad Pitt</actors>
 			<date>2002</date>
 			<image>Terminator.png</image>
@@ -51,7 +51,7 @@
 		</Film>
 		<Film>
 			<title>Fightclub</title>
-			<genre>Action, Drama</genre>
+			<genre>action, drama</genre>
 			<actors>Brad Pitt</actors>
 			<date>2002</date>
 			<image>FightClub.png</image>

@@ -1,9 +1,4 @@
-﻿  app.cpp
-C:\temp\AuebFlix\app.cpp(126,74): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(155,88): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(156,86): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(157,93): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(178,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(179,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(354,9): warning C4553: '==': result of expression not used; did you intend '='?
+﻿  searchRect.cpp
+C:\temp\AuebFlix\searchRect.cpp(81,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\searchRect.cpp(82,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   AuebFlix.vcxproj -> C:\temp\AuebFlix\bin\AuebFlixd.exe

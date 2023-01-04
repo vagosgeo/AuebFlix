@@ -96,6 +96,7 @@ void App::init()
 	searchBox->setPosY(-200);
 	searchBox->setSizeX(400);
 	searchBox->setSizeY(400);
+	searchBox->init();
 
 } // init() ends here ----------
 
@@ -138,7 +139,7 @@ void App::drawAppScreen()
 	//graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 5, CANVAS_WIDTH, CANVAS_HEIGHT / 3, br);
 
 
-	
+
 
 	for (auto film : films) {
 		film->draw();
@@ -155,11 +156,15 @@ void App::drawAppScreen()
 			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 30, film->getActors(), br);
 			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.2, 20, film->getDate(), br);
 			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, film->getDescription(), br);
-			
+
 		}
 	}
-
+	
+	
+		
 	searchBox->draw();
+
+	
 
 	
 } // drawAppScreen() ends here ----------
@@ -180,12 +185,16 @@ void App::updateAppScreen()
 
 
 	std::string search_string = searchBox->getTextField()->str;	// Gets the string from the searchBoxe's textField.
+	std::string SEARCH = searchBox->getSearch();
+	cout << SEARCH << endl;
 	int counter = 0;
+	
 	for (auto  widget : films) {
 
 
 		if (search_string != search_str) {
 			if ((search_string == "") || searchFilmFields(widget, search_string)) {
+				cout << "mphka text" << endl;
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 				counter++;
@@ -196,6 +205,29 @@ void App::updateAppScreen()
 				widget->setPosY(-500);
 			}
 		}
+		if(search_string.empty() && !SEARCH.empty() && SEARCH != "clearfilters" ) {
+			if (searchFilmFields(widget, SEARCH)) {
+				cout << "mphka filter" << endl;
+				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
+				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
+				counter++;
+			}
+			else {
+				widget->setPosX(-100);
+				widget->setPosY(-500);
+			}
+			
+		}
+		else if (SEARCH == "clearfilters" && search_string.empty()) {
+			cout << "clearfilters" << endl;
+			widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
+			widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
+			counter++;
+		}
+		
+		
+		
+		
 
 
 
@@ -256,30 +288,26 @@ void App::updateAppScreen()
 			if (ms.button_left_pressed) {
 				//if the specific button is pressed, move all the films left (circle movement) 
 				if (widget->getPath() == "LButton.png") {
-					int j = 0;
+					
 					for (auto film : films) {
-
-						if (j == 0) {
-
-							DimensionsVector.push_back(film->getPosX());
-							j++;
-
-						}
-						else {
-							DimensionsVector.push_back(film->getPosX());
-							j++;
-						}
+						
+						DimensionsVector.push_back(film->getPosX());
 
 					}
+					cout << DimensionsVector.size() << endl;
 
 					int VectorCounter = 0;
+					cout << films.size() << endl;
 
 					for (auto film : films) {
+						cout << "1" << endl;
 						if (VectorCounter == 0) {
+							
 							film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
 							VectorCounter++;
 						}
 						else {
+							
 							film->setPosX(DimensionsVector[VectorCounter - 1]);
 							VectorCounter++;
 						}
@@ -289,24 +317,17 @@ void App::updateAppScreen()
 				}
 				//else_if the specific button is pressed, move all the films right (circle movement) 
 				else if (widget->getPath() == "RButton.png") {
-
-					int j = 0;
+					
+					
 					for (auto film : films) {
-						if (j == 0) {
-
-							DimensionsVector.push_back(film->getPosX());
-							j++;
-
-						}
-						else {
-							DimensionsVector.push_back(film->getPosX());
-							j++;
-						}
+						
+						DimensionsVector.push_back(film->getPosX());
 					}
 					int VectorCounter = 0;
 
 					for (auto film : films) {
 						if (VectorCounter == DimensionsVector.size() - 1) {
+							
 							film->setPosX(DimensionsVector[0]);
 							VectorCounter++;
 						}
@@ -321,13 +342,15 @@ void App::updateAppScreen()
 				}
 
 				else if (widget->getPath() == "downButton.png") {
-
+					
 					if (searchBox->getDropButtonState() == false) {
 						searchBox->setDropButton(true);
 						forceFocus(widget);			// WHILE DropButtonState IS TRUE HOLDS FOCUS EVEN IF ANOTHER BUTTON IS HOVERED.
+						
 					}
 					else {
 						searchBox->setDropButton(false);
+						
 					}
 				}
 			}
@@ -369,7 +392,7 @@ void App::forceFocus(Widget* object_ptr) {
 
 bool App::searchFilmFields(Film* film, std::string str) {
 
-	std::cout << str;
+	cout << str << endl;
 
 	if (film->getActors().find(str) != std::string::npos) {
 		return true;
