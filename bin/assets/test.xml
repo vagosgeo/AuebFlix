@@ -3,58 +3,58 @@
 		<Film>
 			<title>the godfather</title>
 			<genre>drama, crime</genre>
-			<actors>marlon brando</actors>
-			<date>1987</date>
+			<actors>marlon brando, al pacino</actors>
+			<date>1972</date>
 			<image>Godfather.png</image>
 			<description>DESCRIPTION</description>
 		</Film>
 
 		<Film>
 			<title>fightclub</title>
-			<genre>action, drama</genre>
-			<actors>Brad Pitt</actors>
-			<date>2002</date>
+			<genre>drama</genre>
+			<actors>brad pitt, edward norton</actors>
+			<date>1999</date>
 			<image>FightClub.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
 			<title>a new hope</title>
-			<genre>action, drama</genre>
-			<actors>brad pitt</actors>
-			<date>2002</date>
+			<genre>action, adventure, fantasy</genre>
+			<actors>mark hamill, harrison ford</actors>
+			<date>1977</date>
 			<image>ANewHope.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
 			<title>EmpireStrikesBack</title>
-			<genre>action, drama, fantasy</genre>
-			<actors>Brad Pitt</actors>
-			<date>2002</date>
+			<genre>action, adventure, fantasy</genre>
+			<actors>mark hamill, harrison ford</actors>
+			<date>1980</date>
 			<image>EmpireStrikesBack.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>TheInception</title>
-			<genre>adventure</genre>
-			<actors>Brad Pitt</actors>
-			<date>2002</date>
+			<title>inception</title>
+			<genre>action, adventure</genre>
+			<actors>leonardo dicaprio, joseph gordon</actors>
+			<date>2010</date>
 			<image>TheInception.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>Terminator</title>
-			<genre>action, drama</genre>
-			<actors>Brad Pitt</actors>
-			<date>2002</date>
+			<title>terminator</title>
+			<genre>action</genre>
+			<actors>arnold schwarzenegger, linda hamilton</actors>
+			<date>1991</date>
 			<image>Terminator.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 		<Film>
-			<title>Fightclub</title>
+			<title>top gun</title>
 			<genre>action, drama</genre>
-			<actors>Brad Pitt</actors>
-			<date>2002</date>
-			<image>FightClub.png</image>
+			<actors>tom cruise, tim robbins</actors>
+			<date>1986</date>
+			<image>TopGun.png</image>
 			<description>DESCRIPTION...</description>
 		</Film>
 

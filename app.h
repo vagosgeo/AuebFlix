@@ -6,6 +6,9 @@
 #include <vector>
 #include "textField.h"
 #include "searchRect.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 class App {
 	typedef enum { STATUS_START, STATUS_APP, STATUS_SEARCH } status_t;
@@ -37,5 +40,6 @@ public:
 	void updateAppScreen();
 	bool searchFilmFields(Film* film, std::string str);
 	//void drawSearchScreen();
+	string Capitalize_first_letter(string text);
 	
 };

@@ -122,6 +122,11 @@ void App::drawStartScreen()
 	char info[40];
 	sprintf_s(info, "AUEBFLIX");
 	graphics::drawText(CANVAS_WIDTH / 6, CANVAS_HEIGHT / 2, 40, info, br);
+	graphics::setOrientation(180.0f);
+	br.fill_opacity = 0.5f;
+	graphics::drawText(CANVAS_WIDTH / 4, CANVAS_HEIGHT / 2, 40, info, br);
+	graphics::resetPose();
+	br.fill_opacity = 0.5f;
 	char press[40];
 	sprintf_s(press, "Press ENTER to continue...");
 	graphics::drawText(CANVAS_WIDTH /1.5, CANVAS_HEIGHT /1.1 , 30, press, br);
@@ -152,10 +157,14 @@ void App::drawAppScreen()
 	// draw the texts under the films when the mouse hovers the widgets
 	for (auto film : films) {
 		if (drawText && text == film->getPath()) {
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, film->getTitle(), br);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 30, film->getActors(), br);
+		
+			string TEXT = Capitalize_first_letter(film->getTitle());
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, TEXT, br);
+			TEXT = Capitalize_first_letter(film->getActors());
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 30, TEXT, br);
 			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.2, 20, film->getDate(), br);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, film->getDescription(), br);
+			TEXT = Capitalize_first_letter(film->getDescription());
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, TEXT, br);
 
 		}
 	}
@@ -411,4 +420,24 @@ bool App::searchFilmFields(Film* film, std::string str) {
 	}
 
 
+}
+
+
+//Capitalize the first letter of each word in a string
+string App::Capitalize_first_letter(std::string text)
+{
+	for (int x = 0; x < text.length(); x++)
+	{
+		
+		if (x == 0)
+		{
+			text[x] = toupper(text[x]);
+		}
+		else if (text[x - 1] == ' ')
+		{
+			text[x] = toupper(text[x]);
+		}
+	}
+	
+	return text;
 }

@@ -23,7 +23,7 @@ void searchRect::draw()
 	br.fill_secondary_color[1] = 0.0f;
 	br.fill_secondary_color[2] = 0.0f;
 
-	br.fill_opacity = 2.0f;
+	br.fill_opacity = 0.5f;
 	br.fill_secondary_opacity = 1.f;
 
 	graphics::drawRect(getPosX(), getPosY(), getSizeX(), getSizeY(), br);
@@ -33,6 +33,7 @@ void searchRect::draw()
 	br.fill_color[2] = 1.0f;
 	br.outline_opacity = 0.0f;
 	br.gradient = false;
+	br.fill_opacity = 1.0f;
 
 	graphics::drawText(getPosX() - 50, getPosY() - 160.0f, 30.0f, "Filters", br);
 	
@@ -152,8 +153,8 @@ void searchRect::init() {
 			b->setPosX(550.0f);
 			b->setPosY(-160.0f);
 			b->setPath("ADVENTURE.png");
-			b->setSizeX(70.0f);
-			b->setSizeY(60.0f);
+			b->setSizeX(60.0f);
+			b->setSizeY(30.0f);
 		}
 		else if (i == 5) {
 			b->setPosX(630.0f);
