@@ -12,7 +12,16 @@ class searchRect : public Widget {
 	textField* field;
 	std::vector<Button*> Rectbuttons;
 	std::string Search;
-	
+	float init_from_posx;
+	float init_from_posy;
+	float init_to_posx;
+	float init_to_posy;
+	float cur_from_posx;
+	float cur_from_posy;
+	float cur_to_posx;
+	float cur_to_posy;
+	int counterFirstX = 0;
+	int counterFirstY = 0;
 	
 
 public :
