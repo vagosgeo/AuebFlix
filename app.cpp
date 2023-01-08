@@ -169,7 +169,12 @@ void App::drawAppScreen()
 		}
 	}
 	
-	
+	if (PlayMusic) {
+
+		graphics::playMusic(std::string(ASSET_PATH) + "button.wav", 0.3f, false, 100);
+		PlayMusic = false;
+
+	}
 		
 	searchBox->draw();
 
@@ -193,14 +198,12 @@ void App::updateAppScreen()
 	float my = graphics::windowToCanvasY(ms.cur_pos_y);
 
 
-	std::string search_string = searchBox->getTextField()->str;	// Gets the string from the searchBoxe's textField.
-	std::string SEARCH = searchBox->getSearch();
-	std::string DateSearchFrom = searchBox->getDateSearchFrom();
-	std::string DateSearchTo = searchBox->getDateSearchTo();
-	cout << SEARCH << endl;
-	cout << DateSearchFrom << endl;
-	cout << DateSearchTo << endl;
+	std::string search_string = searchBox->getTextField()->str;	 // Gets the string from the searchBoxe's textField.
+	std::string SEARCH = searchBox->getSearch();				 //Gets the type (filter) that user selects
+	std::string DateSearchFrom = searchBox->getDateSearchFrom(); //Gets the date from (filter) that user selects
+	std::string DateSearchTo = searchBox->getDateSearchTo();	 //Gets the date to (filter) that user selects
 	int counter = 0;
+	Shownfilms.clear();
 	
 	
 	for (auto  widget : films) {
@@ -218,7 +221,7 @@ void App::updateAppScreen()
 			
 			if ((search_string == "") || searchFilmFields(widget, search_string)) {
 				
-				cout << "mphka text" << endl;
+				
 				Shownfilms.push_back(widget);
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
@@ -235,7 +238,7 @@ void App::updateAppScreen()
 			
 			if (searchFilmFields(widget, SEARCH)) {
 
-				cout << "mphka filter" << endl;
+				
 				Shownfilms.push_back(widget);
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
@@ -308,7 +311,6 @@ void App::updateAppScreen()
 		}
 		else
 		{
-			//drawText = false;
 			widget->setSizeX(WIDGET_WIDTH);
 			widget->setSizeY(WIDGET_HEIGHT);
 		}
@@ -332,7 +334,9 @@ void App::updateAppScreen()
 			if (ms.button_left_pressed) {
 				//if the specific button is pressed, move all the films left (circle movement) 
 				if (widget->getPath() == "LButton.png") {
-					cout << Shownfilms.size() << endl;
+					
+						PlayMusic = true;
+
 					if (Shownfilms.empty()) {
 						cout << "mphka films" << endl;
 						for (auto film : films) {
@@ -391,6 +395,8 @@ void App::updateAppScreen()
 				//else_if the specific button is pressed, move all the films right (circle movement) 
 				else if (widget->getPath() == "RButton.png") {
 					
+					PlayMusic = true;
+
 					if (Shownfilms.empty()) {
 						for (auto film : films) {
 

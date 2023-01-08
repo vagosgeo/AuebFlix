@@ -25,6 +25,7 @@ class App {
 	int ClearList;
 	float x;
 	float y;
+	bool PlayMusic = false;
 	Widget* focus = nullptr;
 	std::string search_str;
 	bool DBpressed = false;
