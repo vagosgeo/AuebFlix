@@ -14,6 +14,7 @@
 #include <bits-stdc++.h>
 #include "searchRect.h"
 
+using std::cout;
 using namespace std;
 
 
@@ -40,6 +41,8 @@ void App::draw()
 void App::init()
 {
 	readFilmData(films);	// READS ALL THE FILMS THAT EXIST ON THE .XML AND STORES THEM IN THE 'films' LIST.
+	//Shownfilms.splice(Shownfilms.begin(), films);
+	
 	
 	for (Film* film : films) {			
 		
@@ -106,6 +109,7 @@ void App::update()
 {
 	if (status == STATUS_START) {
 		updateStartScreen();
+		
 	}
 	else if (status == STATUS_APP) {
 		updateAppScreen();
@@ -139,12 +143,8 @@ void App::drawAppScreen()
 	br.outline_opacity = 0.0f;
 	br.texture = ASSET_PATH + std::string("BackGround.png");
 	graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2, CANVAS_WIDTH, CANVAS_HEIGHT, br);
-	//br.outline_opacity = 0.0f;
-	//br.texture = ASSET_PATH + std::string("fontoPlaisio.png");
-	//graphics::drawRect(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 5, CANVAS_WIDTH, CANVAS_HEIGHT / 3, br);
 
-
-
+	
 
 	for (auto film : films) {
 		film->draw();
@@ -195,15 +195,31 @@ void App::updateAppScreen()
 
 	std::string search_string = searchBox->getTextField()->str;	// Gets the string from the searchBoxe's textField.
 	std::string SEARCH = searchBox->getSearch();
+	std::string DateSearchFrom = searchBox->getDateSearchFrom();
+	std::string DateSearchTo = searchBox->getDateSearchTo();
 	cout << SEARCH << endl;
+	cout << DateSearchFrom << endl;
+	cout << DateSearchTo << endl;
 	int counter = 0;
 	
+	
 	for (auto  widget : films) {
-
-
+		// The hierarchy of the filters:
+		// 1. textfield
+		// 2. type
+		// 3. date
+		// The films will be shown, based on textfield regardless the other filters
+		// The films will be shown, based on type if textfield filter is not energized
+		// The films will be shown, based on date if any other filter is not energized
+		
+		
+		//if user writes in the textfield, show the films based on the text 
 		if (search_string != search_str) {
+			
 			if ((search_string == "") || searchFilmFields(widget, search_string)) {
+				
 				cout << "mphka text" << endl;
+				Shownfilms.push_back(widget);
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 				counter++;
@@ -214,9 +230,13 @@ void App::updateAppScreen()
 				widget->setPosY(-500);
 			}
 		}
-		if(search_string.empty() && !SEARCH.empty() && SEARCH != "clearfilters" ) {
+		// else if user selects the type of the movies, show the films based on type
+		else if (!SEARCH.empty() && search_string.empty() && SEARCH != "clearfilters") {
+			
 			if (searchFilmFields(widget, SEARCH)) {
+
 				cout << "mphka filter" << endl;
+				Shownfilms.push_back(widget);
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 				counter++;
@@ -225,18 +245,30 @@ void App::updateAppScreen()
 				widget->setPosX(-100);
 				widget->setPosY(-500);
 			}
-			
+
 		}
-		else if (SEARCH == "clearfilters" && search_string.empty()) {
-			cout << "clearfilters" << endl;
+		//else if user selects the date of the movies, show the films based on date
+		else if (!DateSearchFrom.empty() && !DateSearchTo.empty() && SEARCH.empty() && search_string.empty()) {
+			
+			if (searchFilmDate(widget, DateSearchFrom, DateSearchTo)) {
+				Shownfilms.push_back(widget);
+				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
+				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
+				counter++;
+			}
+			else {
+				widget->setPosX(-100);
+				widget->setPosY(-500);
+			}
+		}
+		//else if user selects clear filters, show all the films 
+		else if(SEARCH == "clearfilters") {
+			Shownfilms.clear();
 			widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 			widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 			counter++;
 		}
-		
-		
-		
-		
+	
 
 
 
@@ -261,6 +293,9 @@ void App::updateAppScreen()
 				text = widget->getPath();
 			}
 			else if (widget->getPath() == "Terminator.png") {
+				text = widget->getPath();
+			}
+			else if (widget->getPath() == "TopGun.png") {
 				text = widget->getPath();
 			}
 
@@ -297,57 +332,108 @@ void App::updateAppScreen()
 			if (ms.button_left_pressed) {
 				//if the specific button is pressed, move all the films left (circle movement) 
 				if (widget->getPath() == "LButton.png") {
-					
-					for (auto film : films) {
+					cout << Shownfilms.size() << endl;
+					if (Shownfilms.empty()) {
+						cout << "mphka films" << endl;
+						for (auto film : films) {
 						
-						DimensionsVector.push_back(film->getPosX());
+							DimensionsVector.push_back(film->getPosX());
 
-					}
-					cout << DimensionsVector.size() << endl;
-
-					int VectorCounter = 0;
-					cout << films.size() << endl;
-
-					for (auto film : films) {
-						cout << "1" << endl;
-						if (VectorCounter == 0) {
-							
-							film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
-							VectorCounter++;
-						}
-						else {
-							
-							film->setPosX(DimensionsVector[VectorCounter - 1]);
-							VectorCounter++;
 						}
 
+						int VectorCounter = 0;
+					
+						for (auto film : films) {
+							
+							if (VectorCounter == 0) {
+
+								film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
+								VectorCounter++;
+							}
+							else {
+
+								film->setPosX(DimensionsVector[VectorCounter - 1]);
+								VectorCounter++;
+							}
+
+						}
+						DimensionsVector.clear();
 					}
-					DimensionsVector.clear();
+					else {
+						cout << "mphka Shownfilms" << endl;
+						for (auto film : Shownfilms) {
+
+							DimensionsVector.push_back(film->getPosX());
+							
+
+						}
+						cout << DimensionsVector.size() << endl;
+						int VectorCounter = 0;
+						for (auto film : Shownfilms) {
+							
+							if (VectorCounter == 0) {
+
+								film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
+								VectorCounter++;
+								cout << VectorCounter << endl;
+							}
+							else {
+
+								film->setPosX(DimensionsVector[VectorCounter - 1]);
+								VectorCounter++;
+								cout << VectorCounter << endl;
+							}
+
+						}
+						DimensionsVector.clear();
+					}
 				}
 				//else_if the specific button is pressed, move all the films right (circle movement) 
 				else if (widget->getPath() == "RButton.png") {
 					
-					
-					for (auto film : films) {
-						
-						DimensionsVector.push_back(film->getPosX());
-					}
-					int VectorCounter = 0;
+					if (Shownfilms.empty()) {
+						for (auto film : films) {
 
-					for (auto film : films) {
-						if (VectorCounter == DimensionsVector.size() - 1) {
-							
-							film->setPosX(DimensionsVector[0]);
-							VectorCounter++;
+							DimensionsVector.push_back(film->getPosX());
 						}
-						else {
-							film->setPosX(DimensionsVector[VectorCounter + 1]);
-							VectorCounter++;
+						int VectorCounter = 0;
+
+						for (auto film : films) {
+							if (VectorCounter == DimensionsVector.size() - 1) {
+
+								film->setPosX(DimensionsVector[0]);
+								VectorCounter++;
+							}
+							else {
+								film->setPosX(DimensionsVector[VectorCounter + 1]);
+								VectorCounter++;
+							}
+
+
 						}
-
-
+						DimensionsVector.clear();
 					}
-					DimensionsVector.clear();
+					else {
+						for (auto film : Shownfilms) {
+
+							DimensionsVector.push_back(film->getPosX());
+						}
+						int VectorCounter = 0;
+						for (auto film : Shownfilms) {
+							if (VectorCounter == DimensionsVector.size() - 1) {
+
+								film->setPosX(DimensionsVector[0]);
+								VectorCounter++;
+							}
+							else {
+								film->setPosX(DimensionsVector[VectorCounter + 1]);
+								VectorCounter++;
+							}
+
+
+						}
+						DimensionsVector.clear();
+					}
 				}
 
 				else if (widget->getPath() == "downButton.png") {
@@ -420,6 +506,28 @@ bool App::searchFilmFields(Film* film, std::string str) {
 	}
 
 
+}
+
+//search the films that the date of produce is between date FROM and date TO
+bool App::searchFilmDate(Film* film, std::string from, std::string to)
+{
+		
+	int Date = stoi (film->getDate()); //casting string to integer
+	int DateFrom = stoi(from);
+	int DateTo = stoi(to);
+
+	if (Date >= DateFrom && Date <= DateTo) {
+		return true;
+	}
+	else if (from.empty() && !to.empty() && Date <= DateTo) {
+		return true;
+	}
+	else if (!from.empty() && to.empty() && Date >= DateFrom) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 

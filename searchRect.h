@@ -20,6 +20,8 @@ class searchRect : public Widget {
 	float cur_from_posy;
 	float cur_to_posx;
 	float cur_to_posy;
+	std::string DateSearchFrom;
+	std::string DateSearchTo;
 	int counterFirstX = 0;
 	int counterFirstY = 0;
 	
@@ -32,5 +34,7 @@ public :
 	bool getDropButtonState() { return dropButton_pressed; }
 	inline textField* getTextField() { return field; }
 	const std::string & getSearch() { return Search; }
+	const std::string& getDateSearchFrom() { return DateSearchFrom; }
+	const std::string& getDateSearchTo() { return DateSearchTo; }
 	void init();
 };

@@ -14,14 +14,6 @@ searchRect::searchRect()
 void searchRect::draw()
 {
 	graphics::Brush br;
-	/*br.fill_color[0] = 0.2f;
-	br.fill_color[1] = 0.2f;
-	br.fill_color[2] = 0.2f;
-	br.outline_opacity = 0.5f;
-	br.gradient = true;
-	br.fill_secondary_color[0] = 1.0f;
-	br.fill_secondary_color[1] = 0.0f;
-	br.fill_secondary_color[2] = 0.0f;*/
 	br.texture = ASSET_PATH + std::string("RectBackground.png");
 	br.fill_opacity = 0.5f;
 	br.fill_secondary_opacity = 1.f;
@@ -55,10 +47,10 @@ void searchRect::draw()
 	graphics::drawText(getPosX() + 160, getPosY() + 170.0f, 10.0f, "2020", br1);
 	
 	
-
+	// draw the buttons and specificaly for the buttons in the date filter, draw texts above them based on the distance from the init position of the button  
 	for (auto button : Rectbuttons) {
 		button->draw();
-		if (button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) > 5.0f && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) < 25.0f) {
+		if (button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) > 8.0f && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) < 25.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1980", br1);
 		}
 		else if (button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) >= 25.0f && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) < 55.0f) {
@@ -73,31 +65,35 @@ void searchRect::draw()
 		else if (button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) >= 110.0f && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) <= 130.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2020", br1);
 		}
-		else if(button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) <= 5.0f ){
+		else if(button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) <= 8.0f ){
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1970", br1);
 		}
+		
+		
 
 
-		if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) > 5.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 25.0f) {
-			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1980", br1);
-		}
-		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 25.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 55.0f) {
-			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1990", br1);
-		}
-		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 55.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 80.0f) {
-			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2000", br1);
-		}
-		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 80.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 110.0f) {
+		if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) > 8.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 25.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2010", br1);
 		}
-		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 110.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) <= 130.0f) {
-			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2020", br1);
+		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 25.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 55.0f) {
+			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2000", br1);
 		}
-		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) <= 5.0f) {
+		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 55.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 80.0f) {
+			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1990", br1);
+		}
+		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 80.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 110.0f) {
+			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1980", br1);
+		}
+		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 110.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) <= 130.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1970", br1);
 		}
+		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) <= 8.0f ) {
+			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2020", br1);
+		}
+		
 	}
 	
+	// draw textfield
 	field->draw();
 	
 }
@@ -117,18 +113,44 @@ void searchRect::update()
 		}
 
 	}
-	else {												// IF DOWN BUTTON IS DE-PRESSED THEN PUT THE SEARCH BOX ABOVE THE UPPER BOUND.(DISSAPPEAR)
-		if (Search == "clearfilters") {
-			Search.clear();
-		}
+	else {						// IF DOWN BUTTON IS DE-PRESSED THEN PUT THE SEARCH BOX ABOVE THE UPPER BOUND.(DISSAPPEAR)
+
+		
 		if (getPosY() > -200) {
 			setPosY(getPosY() - graphics::getDeltaTime() / 2);
 					
 			field->setPosY(field->getPosY() - graphics::getDeltaTime() / 2);	// Also takes away the textFields with the search box.
 			for (auto button : Rectbuttons) {
 				button->setPosY(button->getPosY() - graphics::getDeltaTime() / 2 );
+				
 			}
 		}
+	}
+	if (Search == "clearfilters") {
+		//set the buttons on the date filter back to the init position
+		for (auto button : Rectbuttons) {
+
+			if (button->getPath() == "from.png") {
+				button->setPosX(getPosX() + 30);
+				button->setPosY(getPosY() + 120.0f);
+				cur_from_posx = button->getPosX();
+				cur_from_posy = button->getPosY();
+				counterFirstX == 0;
+				DateSearchFrom.clear();
+
+			}
+			else if (button->getPath() == "to.png") {
+				button->setPosX(getPosX() + 150);
+				button->setPosY(getPosY() + 170.0f);
+				cur_to_posx = button->getPosX();
+				cur_to_posy = button->getPosY();
+				counterFirstY == 0;
+				DateSearchTo.clear();
+				
+			}
+		}
+		// clear the type filter
+		Search.clear();
 	}
 
 	graphics::MouseState ms;
@@ -141,6 +163,7 @@ void searchRect::update()
 	}
 	else {
 		for (auto button : Rectbuttons) {
+			// when the button is pressed take the type of films which is selected
 			if (ms.button_left_pressed && button->contains(mx, my)) {
 
 				if (button->getPath() == "DRAMA.png") {
@@ -161,11 +184,12 @@ void searchRect::update()
 				}
 				else if (button->getPath() == "CLEARFILTERS.png") {
 					Search = "clearfilters";
+
 				}
 				else if (button->getPath() == "from.png" && counterFirstX == 0) {
 					init_from_posx = button->getPosX();   // take the first position of the button 
 					init_from_posy = button->getPosY();
-					cur_from_posx = button->getPosX();   // take the first position of the button 
+					cur_from_posx = button->getPosX();   // take the current position of the button 
 					cur_from_posy = button->getPosY();
 					counterFirstX++;
 
@@ -174,10 +198,11 @@ void searchRect::update()
 					
 					init_to_posx = button->getPosX();	// take the first position of the button
 					init_to_posy = button->getPosY();
-					cur_to_posx = button->getPosX();   // take the first position of the button 
+					cur_to_posx = button->getPosX();   // take the current position of the button 
 					cur_to_posy = button->getPosY();
 					counterFirstY++;
 				}
+				
 
 			}
 			// dragging of mouse when you choose the age on the filters
@@ -187,20 +212,59 @@ void searchRect::update()
 					cur_from_posx = mx;
 					
 				}
-				if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, mx, my) < 120.0f && mx >= init_to_posx) {
+				if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, mx, my) < 120.0f && mx <= init_to_posx) {
 					
 					button->setPosX(mx);
 					cur_to_posx = mx;
 
 				}
 			}
-			/*if (ms.button_left_released && button->contains(mx, my)) {
+			//when the mouse button is released take the date that user select
+			if (ms.button_left_released && button->contains(mx, my)) {
 				if (button->getPath() == "from.png") {
-					cur_from_posx = button->getPosX();
-					cur_from_posy = button->getPosX();
+					if (distance(init_from_posx, init_from_posy, mx, my) > 8.0f && distance(init_from_posx, init_from_posy, mx, my) < 25.0f) {
+						DateSearchFrom = "1980";
+					}
+					else if (distance(init_from_posx, init_from_posy, mx, my) >= 25.0f && distance(init_from_posx, init_from_posy, mx, my) < 55.0f) {
+						DateSearchFrom = "1990";
+					}
+					else if (distance(init_from_posx, init_from_posy, mx, my) >= 55.0f && distance(init_from_posx, init_from_posy, mx, my) < 80.0f) {
+						DateSearchFrom = "2000";
+					}
+					else if (distance(init_from_posx, init_from_posy, mx, my) >= 80.0f && distance(init_from_posx, init_from_posy, mx, my) < 110.0f) {
+						DateSearchFrom = "2010";
+					}
+					else if (distance(init_from_posx, init_from_posy, mx, my) >= 110.0f && distance(init_from_posx, init_from_posy, mx, my) <= 130.0f) {
+						DateSearchFrom = "2020";
+					}
+					else if (distance(init_from_posx, init_from_posy, mx, my) >= 0.5f && distance(init_from_posx, init_from_posy, mx, my) <= 8.0f) {
+						DateSearchFrom = "1970";
+					}
 				}
+				if (button->getPath() == "to.png") {
+					if (distance(init_to_posx, init_to_posy, mx, my) > 8.0f && distance(init_to_posx, init_to_posy, mx, my) < 25.0f) {
+						DateSearchTo = "2010";
+					}
+					else if (distance(init_to_posx, init_to_posy, mx, my) >= 25.0f && distance(init_to_posx, init_to_posy, mx, my) < 55.0f) {
+						DateSearchTo = "2000";
+					}
+					else if (distance(init_to_posx, init_to_posy, mx, my) >= 55.0f && distance(init_to_posx, init_to_posy, mx, my) < 80.0f) {
+						DateSearchTo = "1990";
+					}
+					else if (distance(init_to_posx, init_to_posy, mx, my) >= 80.0f && distance(init_to_posx, init_to_posy, mx, my) < 110.0f) {
+						DateSearchTo = "1980";
+					}
+					else if (distance(init_to_posx, init_to_posy, mx, my) >= 110.0f && distance(init_to_posx, init_to_posy, mx, my) <= 130.0f) {
+						DateSearchTo = "1970";
+					}
+					else if (distance(init_to_posx, init_to_posy, mx, my) >= 0.5f && distance(init_to_posx, init_to_posy, mx, my) <= 8.0f) {
+						
+						DateSearchTo = "2020";
+					}
+				}
+
 				
-			}*/
+			}
 
 		}
 	}
@@ -209,6 +273,7 @@ void searchRect::update()
 }
 
 void searchRect::init() {
+	// initialize the buttons in the filter's rectangle 
 	for (int i = 0; i < 8; i++) {
 		Button* b = new Button();
 		Rectbuttons.push_back(b);
@@ -244,8 +309,8 @@ void searchRect::init() {
 			b->setPosX(550.0f);
 			b->setPosY(-160.0f);
 			b->setPath("ADVENTURE.png");
-			b->setSizeX(60.0f);
-			b->setSizeY(30.0f);
+			b->setSizeX(70.0f);
+			b->setSizeY(50.0f);
 		}
 		else if (i == 5) {
 			b->setPosX(630.0f);
@@ -263,7 +328,7 @@ void searchRect::init() {
 			
 		}
 		else {
-			b->setPosX(getPosX() + 30);
+			b->setPosX(getPosX() + 150);
 			b->setPosY(getPosY() + 170.0f);
 			b->setPath("to.png");
 			b->setSizeX(10.0f);

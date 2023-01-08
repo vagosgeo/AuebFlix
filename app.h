@@ -16,11 +16,13 @@ class App {
 	int counter = 0;
 	std::vector<float> DimensionsVector;
 	std::list<Film*> films;
+	std::list<Film*> Shownfilms;
 	std::vector<Button*> buttons;
 	std::vector<textField*> textFields;
 	bool drawText = false;
 	std::string text;
 	searchRect* searchBox;
+	int ClearList;
 	float x;
 	float y;
 	Widget* focus = nullptr;
@@ -39,6 +41,7 @@ public:
 	void updateStartScreen();
 	void updateAppScreen();
 	bool searchFilmFields(Film* film, std::string str);
+	bool searchFilmDate(Film* film, std::string from,std::string to);
 	//void drawSearchScreen();
 	string Capitalize_first_letter(string text);
 	
