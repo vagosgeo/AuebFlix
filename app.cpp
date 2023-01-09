@@ -42,8 +42,9 @@ void App::init()
 {
 	readFilmData(films);	// READS ALL THE FILMS THAT EXIST ON THE .XML AND STORES THEM IN THE 'films' LIST.
 	//Shownfilms.splice(Shownfilms.begin(), films);
+	Shownfilms.assign(films.begin(), films.end());
 	
-	
+
 	for (Film* film : films) {			
 		
 		// INITIALIZE THE COORDINATES AND SIZE OF ALL THE 'FILM' OBJECTS
@@ -51,6 +52,8 @@ void App::init()
 			film->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 			film->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 			film->setId(counter);
+			cout << film->getPosX() << endl;
+			cout << film->getPosY() << endl;
 			counter++;
 			film->setSizeX(WIDGET_WIDTH);
 			film->setSizeY(WIDGET_HEIGHT);
@@ -146,7 +149,7 @@ void App::drawAppScreen()
 
 	
 
-	for (auto film : films) {
+	for (auto film : Shownfilms) {
 		film->draw();
 	}
 
@@ -155,7 +158,7 @@ void App::drawAppScreen()
 	}
 
 	// draw the texts under the films when the mouse hovers the widgets
-	for (auto film : films) {
+	for (auto film : Shownfilms) {
 		if (drawText && text == film->getPath()) {
 		
 			string TEXT = Capitalize_first_letter(film->getTitle());
@@ -191,7 +194,7 @@ void App::updateStartScreen()
 
 void App::updateAppScreen()
 {
-	cout << graphics::getDeltaTime() << endl;
+	
 	graphics::MouseState ms;
 	graphics::getMouseState(ms);
 	float mx = graphics::windowToCanvasX(ms.cur_pos_x);
@@ -203,7 +206,20 @@ void App::updateAppScreen()
 	std::string DateSearchFrom = searchBox->getDateSearchFrom(); //Gets the date from (filter) that user selects
 	std::string DateSearchTo = searchBox->getDateSearchTo();	 //Gets the date to (filter) that user selects
 	int counter = 0;
-	Shownfilms.clear();
+	if (!search_string.empty()) {
+		
+		cur_search = search_string;
+	}
+	else if (!SEARCH.empty()) {
+		
+		cur_search = SEARCH;
+	}
+	else if (!DateSearchFrom.empty() || !DateSearchTo.empty()) {
+		
+		cur_search = DateSearchFrom;
+		cur_searchTo = DateSearchTo;
+	}
+	
 	
 	
 	for (auto  widget : films) {
@@ -217,56 +233,107 @@ void App::updateAppScreen()
 		
 		
 		//if user writes in the textfield, show the films based on the text 
-		if (search_string != search_str) {
+		if (search_string != search_str && cur_search != prv_search && !search_string.empty()) {
 			
 			if ((search_string == "") || searchFilmFields(widget, search_string)) {
+				//int ListCounter = 0;
 				
-				
-				Shownfilms.push_back(widget);
+				for (auto i = Shownfilms.begin(); i != Shownfilms.end(); i++) {
+					if (*i == widget) {
+						ListCounter  = true;
+						
+					}
+				}
+				if (!ListCounter) {
+					Shownfilms.push_back(widget);
+					
+				}
+				ListCounter = false;
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 				counter++;
 
 			}
 			else {
+				Shownfilms.remove(widget);
 				widget->setPosX(-100);
 				widget->setPosY(-500);
 			}
+			
 		}
 		// else if user selects the type of the movies, show the films based on type
-		else if (!SEARCH.empty() && search_string.empty() && SEARCH != "clearfilters") {
+		else if (!SEARCH.empty() && search_string.empty() && SEARCH != "clearfilters"&& cur_search != prv_search) {
 			
 			if (searchFilmFields(widget, SEARCH)) {
-
+				//int ListCounter = 0;
 				
-				Shownfilms.push_back(widget);
+				for (auto i = Shownfilms.begin(); i != Shownfilms.end(); i++) {
+					if (*i == widget) {
+					
+						ListCounter = true;
+						
+						
+					}
+					
+				}
+				if (!ListCounter) {
+					Shownfilms.push_back(widget);
+					
+				}
+				cout << Shownfilms.size() << endl;
+				ListCounter = false;
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 				counter++;
 			}
 			else {
+				Shownfilms.remove(widget);
+				
 				widget->setPosX(-100);
 				widget->setPosY(-500);
 			}
-
+			
 		}
 		//else if user selects the date of the movies, show the films based on date
-		else if (!DateSearchFrom.empty() && !DateSearchTo.empty() && SEARCH.empty() && search_string.empty()) {
+		else if (!DateSearchFrom.empty() && !DateSearchTo.empty() && SEARCH.empty() && search_string.empty() && (cur_search != prv_search || cur_searchTo!=prv_searchTo)) {
 			
 			if (searchFilmDate(widget, DateSearchFrom, DateSearchTo)) {
-				Shownfilms.push_back(widget);
+				//int ListCounter = 0;
+				for (auto i = Shownfilms.begin(); i != Shownfilms.end(); i++) {
+					if (*i == widget) {
+						
+						ListCounter = true;
+					}
+				}
+				if (!ListCounter) {
+					Shownfilms.push_back(widget);
+					
+				}
+				ListCounter = false;
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 				counter++;
 			}
 			else {
+				Shownfilms.remove(widget);
 				widget->setPosX(-100);
 				widget->setPosY(-500);
 			}
+		
 		}
 		//else if user selects clear filters, show all the films 
 		else if(SEARCH == "clearfilters") {
-			Shownfilms.clear();
+			for (auto i = Shownfilms.begin(); i != Shownfilms.end(); i++) {
+				if (*i == widget) {
+
+					ListCounter = true;
+				}
+			}
+			if (!ListCounter) {
+				Shownfilms.push_back(widget);
+
+			}
+			ListCounter = false;
 			widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 			widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 			counter++;
@@ -315,6 +382,20 @@ void App::updateAppScreen()
 			widget->setSizeY(WIDGET_HEIGHT);
 		}
 	}
+	if (!search_string.empty()) {
+		
+		prv_search = search_string;
+	}
+	else if (!SEARCH.empty()) {
+		
+		prv_search = SEARCH;
+	}
+	else if (!DateSearchFrom.empty() || !DateSearchTo.empty()) {
+		prv_search = DateSearchFrom;
+		prv_searchTo = DateSearchTo;
+		
+	}
+	
 
 	for (auto widget : buttons) {
 		if (widget->contains(mx, my)) {
@@ -338,7 +419,7 @@ void App::updateAppScreen()
 						PlayMusic = true;
 
 					if (Shownfilms.empty()) {
-						cout << "mphka films" << endl;
+						
 						for (auto film : films) {
 						
 							DimensionsVector.push_back(film->getPosX());
@@ -364,14 +445,15 @@ void App::updateAppScreen()
 						DimensionsVector.clear();
 					}
 					else {
-						cout << "mphka Shownfilms" << endl;
+						
 						for (auto film : Shownfilms) {
 
 							DimensionsVector.push_back(film->getPosX());
-							
+							cout << film->getPath();
+							cout << film->getPosX() << endl;
 
 						}
-						cout << DimensionsVector.size() << endl;
+						
 						int VectorCounter = 0;
 						for (auto film : Shownfilms) {
 							
@@ -379,13 +461,15 @@ void App::updateAppScreen()
 
 								film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
 								VectorCounter++;
-								cout << VectorCounter << endl;
+								cout << film->getPath();
+								cout << film->getPosX() << endl;
 							}
 							else {
 
 								film->setPosX(DimensionsVector[VectorCounter - 1]);
 								VectorCounter++;
-								cout << VectorCounter << endl;
+								cout << film->getPath();
+								cout << film->getPosX() << endl;
 							}
 
 						}
@@ -493,8 +577,7 @@ void App::forceFocus(Widget* object_ptr) {
 
 bool App::searchFilmFields(Film* film, std::string str) {
 
-	cout << str << endl;
-
+	
 	if (film->getActors().find(str) != std::string::npos) {
 		return true;
 	}
@@ -518,9 +601,9 @@ bool App::searchFilmFields(Film* film, std::string str) {
 bool App::searchFilmDate(Film* film, std::string from, std::string to)
 {
 		
-	int Date = stoi (film->getDate()); //casting string to integer
-	int DateFrom = stoi(from);
-	int DateTo = stoi(to);
+	int Date = stol (film->getDate()); //casting string to integer
+	int DateFrom = stol(from);
+	int DateTo = stol(to);
 
 	if (Date >= DateFrom && Date <= DateTo) {
 		return true;

@@ -28,7 +28,11 @@ class App {
 	bool PlayMusic = false;
 	Widget* focus = nullptr;
 	std::string search_str;
-	bool DBpressed = false;
+	bool ListCounter = false;
+	std::string cur_searchTo;
+	std::string prv_searchTo;
+	std::string cur_search;
+	std::string prv_search;
 
 public:
 	void draw();

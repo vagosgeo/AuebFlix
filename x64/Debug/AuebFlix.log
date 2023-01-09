@@ -1,13 +1,9 @@
 ﻿  app.cpp
-C:\temp\AuebFlix\app.cpp(136,74): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(164,75): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(165,86): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(139,74): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\temp\AuebFlix\app.cpp(167,75): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(197,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(198,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(478,9): warning C4553: '==': result of expression not used; did you intend '='?
-  main.cpp
-  readFilmData.cpp
-C:\temp\AuebFlix\readFilmData.cpp(13,10): warning C4101: 'amountText': unreferenced local variable
-  Generating Code...
+C:\temp\AuebFlix\app.cpp(168,86): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(170,75): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(200,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(201,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(562,9): warning C4553: '==': result of expression not used; did you intend '='?
   AuebFlix.vcxproj -> C:\temp\AuebFlix\bin\AuebFlixd.exe

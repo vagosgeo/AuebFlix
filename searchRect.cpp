@@ -152,6 +152,8 @@ void searchRect::update()
 		// clear the type filter
 		Search.clear();
 	}
+	
+
 
 	graphics::MouseState ms;
 	graphics::getMouseState(ms);
@@ -167,7 +169,7 @@ void searchRect::update()
 			if (ms.button_left_pressed && button->contains(mx, my)) {
 
 				if (button->getPath() == "DRAMA.png") {
-					cout << "Button Pressed" << endl;
+					
 					Search = "drama";
 				}
 				else if (button->getPath() == "ACTION.png") {
