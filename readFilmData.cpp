@@ -77,6 +77,16 @@ void readFilmData(list<Film*>& list) {
 
                 list.push_back(film);
 
+                std::string descr = film->getDescription();
+                int counter = 0;
+                for (const char ch : descr) {
+                    if (ch == '\\') {
+                        descr.replace(counter, 3, "\n");
+                    }
+                    counter++;
+                }
+                film->setDescription(descr);
+                std::cout << film->getDescription() << "||";
 
                 pAccount = pAccount->NextSiblingElement("Film");
 

@@ -30,7 +30,7 @@ void textField::draw() {
 		if (str.size() < 1) {									// IF str.size = 0 THEN  str += ch.
 			str += ch;
 			chars_timeCounter = graphics::getGlobalTime();		//GETS GLOBAL TIME SO WE CAN HANDLE INPUT BY ms THAT PASSED SINCE WE STARTED THE PROGRAMM.
-		}
+		}     
 		else if (str[str.size() - 1] != ch) {					//IF THE LAST CHAR OF str  IS DIFFERENT THAN THE NEW INPUT -> str += ch
 			str += ch;
 			std::cout << str.size() << "|||" << str;

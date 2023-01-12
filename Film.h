@@ -10,6 +10,7 @@ class Film : public Widget {
 	std::string description;
 	std::string genre;
 	std::string date;
+	bool drawData = false;
 	
 public:
 	void update();
@@ -26,6 +27,8 @@ public:
 	void setGenre(std::string gen) { genre = gen; }
 	std::string getDate() { return date; }
 	void setDate(std::string d) { date = d; }
+	void setDrawData(bool flag) { drawData = flag; }
+	bool getDrawData() { return drawData; }
 	
 
 

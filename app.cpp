@@ -142,6 +142,7 @@ void App::drawStartScreen()
 
 void App::drawAppScreen()
 {
+	
 	graphics::Brush br;
 	br.outline_opacity = 0.0f;
 	br.texture = ASSET_PATH + std::string("BackGround.png");
@@ -159,16 +160,24 @@ void App::drawAppScreen()
 
 	// draw the texts under the films when the mouse hovers the widgets
 	for (auto film : Shownfilms) {
-		if (drawText && text == film->getPath()) {
+		if (film -> getDrawData() && text == film->getPath()) {
 		
 			string TEXT = Capitalize_first_letter(film->getTitle());
 			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.6, 40, TEXT, br);
 			TEXT = Capitalize_first_letter(film->getActors());
 			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.4, 30, TEXT, br);
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.2, 20, film->getDate(), br);
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.25, 20, film->getDate(), br);
 			TEXT = Capitalize_first_letter(film->getDescription());
-			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, TEXT, br);
-
+			// breaks Description in substr1, substr2 so the description can be printed with a newline.
+			// finds the \n and breaks the string in two substrings. and prints them seperately.
+			int charPos = TEXT.find("\n");
+			std::string substr1 = TEXT.substr(0, charPos);
+			std::string substr2 = TEXT.substr(charPos + 1, TEXT.size());
+			graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.1, 20, substr1, br);
+			// if there is no "\n" in the description the print the full string at once.
+			if (charPos != -1) {
+				graphics::drawText(CANVAS_WIDTH / 10, CANVAS_HEIGHT / 1.05, 20, substr2, br);
+			}
 		}
 	}
 	
@@ -345,8 +354,9 @@ void App::updateAppScreen()
 
 		if (widget->contains(mx, my) && requestFocus(widget)) {
 
-			// if the mouse hovers a specific film, drawtext = true and take the path of the film
-			drawText = true;
+			// if the mouse hovers a specific film, film.drawData = true and take the path of the film
+			widget->setDrawData(true);
+			
 			if (widget->getPath() == "Godfather.png") {
 				text = widget->getPath();
 			}
@@ -375,11 +385,15 @@ void App::updateAppScreen()
 				widget->setSizeX(widget_x + graphics::getDeltaTime() / 20);
 				widget->setSizeY(widget_y + graphics::getDeltaTime() / 20);
 			}
+			
 		}
 		else
 		{
+			// if mouse isn't hovering over the current movie set drawData = false.
+			widget->setDrawData(false);
 			widget->setSizeX(WIDGET_WIDTH);
 			widget->setSizeY(WIDGET_HEIGHT);
+			
 		}
 	}
 	if (!search_string.empty()) {
