@@ -49,7 +49,7 @@ void searchRect::draw()
 	
 	// draw the buttons and specificaly for the buttons in the date filter, draw texts above them based on the distance from the init position of the button  
 	for (auto button : Rectbuttons) {
-		button->draw();
+		
 		if (button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) > 8.0f && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) < 25.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1980", br1);
 		}
@@ -65,11 +65,11 @@ void searchRect::draw()
 		else if (button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) >= 110.0f && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) <= 130.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2020", br1);
 		}
-		else if(button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) <= 8.0f ){
+		else if (button->getPath() == "from.png" && distance(init_from_posx, init_from_posy, cur_from_posx, cur_from_posy) <= 8.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1970", br1);
 		}
-		
-		
+
+
 
 
 		if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) > 8.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) < 25.0f) {
@@ -87,11 +87,46 @@ void searchRect::draw()
 		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) >= 110.0f && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) <= 130.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "1970", br1);
 		}
-		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) <= 8.0f ) {
+		else if (button->getPath() == "to.png" && distance(init_to_posx, init_to_posy, cur_to_posx, cur_to_posy) <= 8.0f) {
 			graphics::drawText(button->getPosX() - 8.0f, button->getPosY() - 15.0f, 10.0f, "2020", br1);
+		}
+
+		//if the mouse is on the button(type filters), draw the button with grey color
+		if (colorButton && Buttoncolor == button->getPath() && button->getPath() != "from.png" && button->getPath() != "to.png") {
+
+			button->drawButton();
+			colorButton = false;
+			
+		}
+		else {
+			button->draw();
+		}
+
+		//if you pressed a specific button from the type filters, make it grey until the search will be changed 
+		if (Search == "drama" && button->getPath() == "DRAMA.png") {
+			button->drawButton();
+		}
+		else if (Search == "action" && button->getPath() == "ACTION.png") {
+			button->drawButton();
+		}
+		else if (Search == "crime" && button->getPath() == "CRIME.png") {
+			button->drawButton();
+		}
+		else if (Search == "fantasy" && button->getPath() == "FANTASY.png") {
+			button->drawButton();
+		}
+		else if (Search == "adventure" && button->getPath() == "ADVENTURE.png") {
+			button->drawButton();
 		}
 		
 	}
+			
+	
+				
+				
+			
+		
+	
 	
 	// draw textfield
 	field->draw();
@@ -160,12 +195,21 @@ void searchRect::update()
 	float mx = graphics::windowToCanvasX(ms.cur_pos_x);
 	float my = graphics::windowToCanvasY(ms.cur_pos_y);
 
+
+
 	if (field->contains(mx, my) ) {
 		field->checkScanCodes();
 	}
 	else {
 		for (auto button : Rectbuttons) {
 			// when the button is pressed take the type of films which is selected
+			if (button->contains(mx, my) && button->getPath() != "from.png" && button->getPath() != "to.png") {
+				
+				colorButton = true;
+				Buttoncolor = button->getPath();
+			}
+
+
 			if (ms.button_left_pressed && button->contains(mx, my)) {
 
 				if (button->getPath() == "DRAMA.png") {

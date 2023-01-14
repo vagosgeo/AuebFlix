@@ -1,9 +1,10 @@
 ﻿  app.cpp
-C:\temp\AuebFlix\app.cpp(139,74): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(167,75): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(168,86): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(170,75): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\temp\AuebFlix\app.cpp(200,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(201,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\temp\AuebFlix\app.cpp(562,9): warning C4553: '==': result of expression not used; did you intend '='?
+C:\temp\AuebFlix\app.cpp(137,74): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(166,75): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(171,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\temp\AuebFlix\app.cpp(174,78): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(177,80): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\temp\AuebFlix\app.cpp(207,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(208,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\temp\AuebFlix\app.cpp(573,9): warning C4553: '==': result of expression not used; did you intend '='?
   AuebFlix.vcxproj -> C:\temp\AuebFlix\bin\AuebFlixd.exe

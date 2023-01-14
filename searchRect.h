@@ -24,6 +24,8 @@ class searchRect : public Widget {
 	std::string DateSearchTo;
 	int counterFirstX = 0;
 	int counterFirstY = 0;
+	bool colorButton = false;
+	std::string Buttoncolor;
 	
 
 public :

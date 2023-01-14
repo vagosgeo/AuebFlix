@@ -86,7 +86,7 @@ void readFilmData(list<Film*>& list) {
                     counter++;
                 }
                 film->setDescription(descr);
-                std::cout << film->getDescription() << "||";
+                
 
                 pAccount = pAccount->NextSiblingElement("Film");
 

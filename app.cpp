@@ -52,8 +52,6 @@ void App::init()
 			film->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 			film->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
 			film->setId(counter);
-			cout << film->getPosX() << endl;
-			cout << film->getPosY() << endl;
 			counter++;
 			film->setSizeX(WIDGET_WIDTH);
 			film->setSizeY(WIDGET_HEIGHT);
@@ -216,7 +214,7 @@ void App::updateAppScreen()
 	std::string DateSearchTo = searchBox->getDateSearchTo();	 //Gets the date to (filter) that user selects
 	int counter = 0;
 	if (!search_string.empty()) {
-		
+
 		cur_search = search_string;
 	}
 	else if (!SEARCH.empty()) {
@@ -227,6 +225,11 @@ void App::updateAppScreen()
 		
 		cur_search = DateSearchFrom;
 		cur_searchTo = DateSearchTo;
+	}
+	else {
+
+		cur_search.clear();
+		
 	}
 	
 	
@@ -242,7 +245,7 @@ void App::updateAppScreen()
 		
 		
 		//if user writes in the textfield, show the films based on the text 
-		if (search_string != search_str && cur_search != prv_search && !search_string.empty()) {
+		if (search_string != search_str && cur_search != prv_search || !search_string.empty()) {
 			
 			if ((search_string == "") || searchFilmFields(widget, search_string)) {
 				//int ListCounter = 0;
@@ -289,7 +292,7 @@ void App::updateAppScreen()
 					Shownfilms.push_back(widget);
 					
 				}
-				cout << Shownfilms.size() << endl;
+				
 				ListCounter = false;
 				widget->setPosX(CANVAS_WIDTH * (counter + 0.9f) / 6.8f);
 				widget->setPosY(CANVAS_HEIGHT * (0.6f) / 3.0f);
@@ -463,8 +466,6 @@ void App::updateAppScreen()
 						for (auto film : Shownfilms) {
 
 							DimensionsVector.push_back(film->getPosX());
-							cout << film->getPath();
-							cout << film->getPosX() << endl;
 
 						}
 						
@@ -475,15 +476,11 @@ void App::updateAppScreen()
 
 								film->setPosX(DimensionsVector[DimensionsVector.size() - 1]);
 								VectorCounter++;
-								cout << film->getPath();
-								cout << film->getPosX() << endl;
 							}
 							else {
 
 								film->setPosX(DimensionsVector[VectorCounter - 1]);
 								VectorCounter++;
-								cout << film->getPath();
-								cout << film->getPosX() << endl;
 							}
 
 						}

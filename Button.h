@@ -12,7 +12,7 @@ public:
 	void draw();
 	void setPath(std::string path);
 	std::string getPath();
-
+	void drawButton();
 
 
 };
