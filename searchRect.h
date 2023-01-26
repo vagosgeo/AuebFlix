@@ -35,8 +35,8 @@ public :
 	void setDropButton(bool b) { dropButton_pressed = b; }
 	bool getDropButtonState() { return dropButton_pressed; }
 	inline textField* getTextField() { return field; }
-	const std::string & getSearch() { return Search; }
-	const std::string& getDateSearchFrom() { return DateSearchFrom; }
-	const std::string& getDateSearchTo() { return DateSearchTo; }
+	std::string getSearch() { return Search; }
+	std::string getDateSearchFrom() { return DateSearchFrom; }
+	std::string getDateSearchTo() { return DateSearchTo; }
 	void init();
 };
